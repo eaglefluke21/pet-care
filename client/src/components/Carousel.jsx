@@ -68,7 +68,7 @@ const Carousel = () => {
                         Welcome to Cannie Companion
                         </h1>
 
-                        <p className="lg:text-justify hyphens-auto w-96 py-3 font-quick text-xl sm:text-2xl sm:items-center lg:w-[40rem] lg:ml-8"> {slides[currentIndex].description} </p>
+                        <p className="lg:text-justify  py-3 font-quick text-xl lg:text-2xl sm:items-center sm:w-96 lg:w-[40rem] lg:ml-8"> {slides[currentIndex].description} </p>
 
                     </div>
 
