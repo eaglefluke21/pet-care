@@ -45,7 +45,7 @@ const Carousel = () => {
 
     return (
         <>
-            <div className="flex flex-row justify-center sm:items-center  bg-gradient-to-t from-blue-200 via-blue-100 to-blue-200 rounded-md py-6 " >
+            <div className="flex flex-row justify-center sm:items-center  rounded-md py-6 " >
 
                 <img src={LeftNav} onClick={prevSlide}
                     className="h-10 w-8 cursor-pointer mt-20 mr-auto sm:mt-0" />

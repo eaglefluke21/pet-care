@@ -6,12 +6,12 @@ const NavLinks = () => {
 
     return (
         <>
-            <NavLink to="/" className="hover:text-blue-800 sm:text-xl"> Home</NavLink>
-            <NavLink to="/Breeds" className="hover:text-blue-800 sm:text-xl"> Breeds</NavLink>
-            <NavLink to="/Adoption" className="hover:text-blue-800 sm:text-xl">Adoption</NavLink>
-            <NavLink to="/Training" className="hover:text-blue-800 sm:text-xl">Training</NavLink>
-            <NavLink to="/Health" className="hover:text-blue-800 sm:text-xl"> Health & Care</NavLink>
-            <NavLink to="/Blog"className="hover:text-blue-800 sm:text-xl"> Blog</NavLink>
+            <NavLink to="/" className=" sm:text-xl"> Home</NavLink>
+            <NavLink to="/Breeds" className=" sm:text-xl"> Breeds</NavLink>
+            <NavLink to="/Adoption" className=" sm:text-xl">Adoption</NavLink>
+            <NavLink to="/Training" className=" sm:text-xl">Training</NavLink>
+            <NavLink to="/Health" className=" sm:text-xl"> Health & Care</NavLink>
+            <NavLink to="/Blog"className=" sm:text-xl"> Blog</NavLink>
             <NavLink to="/Login" className="lg:ml-auto lg:pr-8">  <button className="bg-black sm:py-2 sm:px-3 py-1 px-8 rounded-md text-sm font-anta text-white "> Log In</button> </NavLink>
             </>
     )
