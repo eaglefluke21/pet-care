@@ -1,24 +1,26 @@
 import express from 'express';
 import dotenv from 'dotenv';
+// Importing route handlers
+import userRoutes from './routes/userRoutes.js';
 
 dotenv.config();
 
-const PORT = process.env.PORT;
-
-console.log(process.env.PORT);
-
 const app = express();
 
-console.log('server is running');
+const port = process.env.PORT;
 
-// Route to display a message when accessing the root url
-app.get('/',(req,res) => {
-    res.send("Hello from Cannine Companion");
-});
+console.log(port);
 
-// Starting the server
+app.get('/', function(req,res){
+    
+    res.send(" working !!!!");
+})
 
-app.listen(PORT, () => {
-    console.log(`server is running on port ${PORT}`);
-    console.log(`You can access the server at http://localhost:${PORT}`);
+
+// Using Route handlers
+app.use('/users',userRoutes());
+
+
+app.listen(port , function(){
+    console.log(`server is listening at http://localhost:${port}`);
 });
