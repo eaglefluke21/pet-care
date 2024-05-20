@@ -1,12 +1,57 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import Google from "../assets/google.svg";
-import Github from "../assets/github.svg";
 import SignupImage from "../assets/gsdpups.jpg";
 import { NavLink } from "react-router-dom";
+import CryptoJS from 'crypto-js';
+import defaultText from '../utils/EncryptKey.js'
 
 function Signup() {
+    
+    const [Formdata, setFormdata] = useState({
+        username:'',
+        email:'',
+        password:'',
+    })
+
+    const handleChange = (e) => {
+
+        setFormdata({
+            ...Formdata , [e.target.id] : e.target.value
+        });
+
+    };
+
+    const handleSubmit = async(e) => {
+
+        e.preventDefault();
+
+        try{
+
+            const backendurl = 'http://localhost:3000';
+            const url = `${backendurl}/users/register`;
+
+            const encryptedPassword = CryptoJS.AES.encrypt(Formdata.password,defaultText).toString();
+
+            const responsestore = await fetch(url,{
+                method:'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({...Formdata,password: encryptedPassword}),
+            });
+
+            const responsejson = await responsestore.json();
+
+
+
+            console.log(responsejson);
+        } catch(error){
+
+            console.log("Error occured", error);
+        }
+
+    };
 
     return(
         <div className="flex flex-col min-h-screen ">
@@ -15,39 +60,40 @@ function Signup() {
 
         <div className="flex flex-col lg:flex-row lg:justify-evenly bg-orange-200 lg:bg-blue-100 py-16 rounded-md">
 
-            <div className="flex flex-col justify-center px-6 sm:px-40 lg:px-20 lg:w-[40rem]">
+
+
+            <form className="flex flex-col justify-center px-6 sm:px-40 lg:px-20 lg:w-[40rem] " onSubmit={handleSubmit}>
 
             <p className="font-quick text-3xl font-bold mb-10"> Create a new account</p>
 
             <div className="mb-10">
             <label className="font-quick text-lg font-bold "> User Name </label>
-            <input id="username"  className="w-full border-gray-700  border rounded-md py-1 font-quick ps-4 font-semibold "></input>
+            <input id="username" value={Formdata.username} className="w-full border-gray-700  border rounded-md py-1 font-quick ps-4 font-semibold " onChange={handleChange}></input>
             </div>
 
             <div className="mb-10">
             <label className="font-quick text-lg font-bold "> Email Address </label>
-            <input id="email"  className="w-full border-gray-700  border rounded-md py-1 font-quick ps-4 font-semibold "></input>
+            <input id="email" type="email" value={Formdata.email} className="w-full border-gray-700  border rounded-md py-1 font-quick ps-4 font-semibold " onChange={handleChange}></input>
             </div>
 
             <div className="mb-10">
             <label className="font-quick text-lg font-bold "> Password </label>
-            <input id="password"  className="w-full border-gray-700  border rounded-md py-1 font-quick ps-4 font-semibold"></input>
+            <input id="password" type="password" value={Formdata.password} className="w-full border-gray-700  border rounded-md py-1 font-quick ps-4 font-semibold" onChange={handleChange}></input>
             </div>
 
            
-            <button className="w-full bg-black rounded-md py-1.5 font-quick font-semibold shadow-sm shadow-black text-white "> Sign Up</button>
+            <button type="submit" className="w-full bg-black rounded-md py-1.5 font-quick font-semibold shadow-sm shadow-black text-white "> Sign Up</button>
+
             <p className="font-quick font-semibold  mx-auto mt-2 "> Already Have an Account ? <NavLink to="/Login"> <span className="font-quick font-bold hover:underline cursor-pointer">Log In.</span></NavLink></p>
 
-          
-        
+            </form>  
 
-            </div>  
 
             <img src={SignupImage} className="rounded-md shadow-md object-cover invisible lg:visible"/>
 
+
+
         </div>
-
-
 
         <Footer/>
 

@@ -2,10 +2,15 @@ import express from 'express';
 import dotenv from 'dotenv';
 // Importing route handlers
 import userRoutes from './routes/userRoutes.js';
+import cors from 'cors';
 
 dotenv.config();
 
 const app = express();
+
+app.use(express.json());
+
+app.use(cors());
 
 const port = process.env.PORT;
 
