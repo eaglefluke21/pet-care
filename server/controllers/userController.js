@@ -49,9 +49,7 @@ try {
     await user.save();
 
     res.status(201).json(
-        {msg: 'User created sucessfully',
-
-        }
+        {msg: 'User created sucessfully'  }
     );
 
 
