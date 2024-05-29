@@ -9,7 +9,7 @@ function Home() {
 
             <Header/>
 
-            <div className=" flex flex-col items-center  rounded-lg bg-stone-200 ">
+            <div className=" flex flex-col items-center  rounded-lg bg-stone-200 pb-20 lg:pb-0">
 
                 <h1 className=" text-xl text-center font-anta text-black pt-4 lg:hidden ">
 
