@@ -5,9 +5,13 @@ import SignupImage from "../assets/gsdpups.jpg";
 import { NavLink } from "react-router-dom";
 import CryptoJS from 'crypto-js';
 import defaultText from '../utils/EncryptKey.js'
+import Popup from "../components/Popup.jsx";
 
 function Signup() {
-    
+
+    const[isPopupVisible , setPopupVisible] = useState(false);
+
+
     const [Formdata, setFormdata] = useState({
         username:'',
         email:'',
@@ -42,15 +46,23 @@ function Signup() {
             });
 
             const responsejson = await responsestore.json();
-
-
-
             console.log(responsejson);
+
+            if(responsestore.status === 201) {
+                setPopupVisible(true);                
+            } else {
+                console.error('User creation failed', error);
+            }
+
         } catch(error){
 
             console.log("Error occured", error);
         }
 
+    };
+    
+    const closePopup = () => {
+        setPopupVisible(false);
     };
 
     return(
@@ -92,6 +104,15 @@ function Signup() {
             <img src={SignupImage} className="rounded-md shadow-md object-cover invisible lg:visible"/>
 
 
+
+        </div>
+
+        <div>
+            {
+                isPopupVisible && 
+                    <Popup message="User Created Successfully" onClose={closePopup} />
+                
+            }
 
         </div>
 
