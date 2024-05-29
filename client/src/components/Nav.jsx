@@ -1,18 +1,19 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
+import close from "../assets/close.svg"
 
 const NavLinks = () => {
 
     return (
         <>
-            <NavLink to="/" className=" sm:text-xl font-anta"> Home</NavLink>
-            <NavLink to="/Breeds" className=" sm:text-xl font-anta"> Breeds</NavLink>
-            <NavLink to="/Adoption" className=" sm:text-xl font-anta">Adoption</NavLink>
-            <NavLink to="/Training" className=" sm:text-xl font-anta">Training</NavLink>
-            <NavLink to="/Health" className=" sm:text-xl font-anta"> Health & Care</NavLink>
-            <NavLink to="/Blog"className=" sm:text-xl font-anta"> Blog</NavLink>
-            <NavLink to="/Login" className="lg:ml-auto lg:pr-8">  <button className="bg-black sm:py-2 sm:px-3 py-1 px-8 rounded-md text-sm font-anta text-white "> Log In</button> </NavLink>
+            <NavLink to="/" className="  sm:text-xl font-quick  w-full text-center lg:w-auto hover:bg-gray-200 lg:hover:bg-transparent  "> Home</NavLink>
+            <NavLink to="/Breeds" className="  sm:text-xl font-quick   w-full text-center lg:w-auto hover:bg-gray-200 lg:hover:bg-transparent "> Breeds</NavLink>
+            <NavLink to="/Adoption" className=" sm:text-xl font-quick w-full text-center lg:w-auto hover:bg-gray-200 lg:hover:bg-transparent ">Adoption</NavLink>
+            <NavLink to="/Training" className=" sm:text-xl font-quick  w-full text-center lg:w-auto hover:bg-gray-200 lg:hover:bg-transparent ">Training</NavLink>
+            <NavLink to="/Health" className=" sm:text-xl font-quick  w-full text-center lg:w-auto hover:bg-gray-200 lg:hover:bg-transparent "> Health & Care</NavLink>
+            <NavLink to="/Blog"className=" sm:text-xl font-quick  w-full text-center lg:w-auto hover:bg-gray-200 lg:hover:bg-transparent "> Blog</NavLink>
+            <NavLink to="/Login" className="lg:ml-auto lg:pr-8">  <button className="bg-black sm:py-2 sm:px-3 py-1 px-8 rounded-md text-sm font-quick text-white "> Log In</button> </NavLink>
             </>
     )
 
@@ -28,21 +29,21 @@ const Nav = () => {
 
     return (
         <>
-        <nav>
-        <div className="hidden sm:flex  gap-x-10 ">
+        <nav className="">
+        <div className="hidden lg:flex  gap-x-10 ">
         <NavLinks/>
         </div>
 
-        <div className="sm:hidden">
+        <div className="lg:hidden">
             <button onClick={toggleNavbar} className="pr-8"> 
-            {isOpen ? <span className="   text-3xl font-comic text-black" > X </span> :<span className="bg-black py-2 px-3 rounded-lg text-sm font-comic text-white "> Menu</span>}
+            {isOpen ? <span className="   text-3xl font-quick text-black" > <img src={close} className="h-8 w-8"/> </span> :<span className="bg-black py-2 px-3 rounded-lg text-sm font-comic text-white "> Menu</span>}
             </button>
         </div>
         
         </nav>
 
         {isOpen && (
-            <div className="flex basis-full flex-col items-center gap-2 sm:hidden">
+            <div className="flex flex-col basis-full items-center gap-2 shadow-md py-4 lg:hidden">
                 <NavLinks/>
             </div>
         )}

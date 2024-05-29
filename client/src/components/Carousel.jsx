@@ -45,30 +45,30 @@ const Carousel = () => {
 
     return (
         <>
-            <div className="flex flex-row justify-center sm:items-center  rounded-md py-6 " >
+            <div className="flex flex-row justify-center lg:items-center  rounded-md py-6 " >
 
                 <img src={LeftNav} onClick={prevSlide}
-                    className="h-10 w-8 cursor-pointer mt-20 mr-auto sm:mt-0" />
+                    className="h-10 w-8 cursor-pointer mt-20 lg:mr-10 " />
 
-                <div className="flex flex-col sm:flex-row  sm:items-center sm:gap-6">
+                <div className="flex flex-col  lg:flex-row items-center lg:gap-6">
 
                     <div>
                         {/* <p className="text-xl font-anta text-center py-2"> {slides[currentIndex].name} </p> */}
                         <Link to={slides[currentIndex].route} >
-                            <img className={`h-80 w-96 sm:w-full sm:h-full shadow-md shadow-white object-cover rounded-md transition-transform duration-700 transform hover:scale-95 ${transitioning ? 'scale-105' : 'scale-100'}`}
+                            <img className={`h-72 w-80 lg:h-[30rem] lg:w-[28rem] shadow-md  shadow-white object-cover rounded-md transition-transform duration-700 transform hover:scale-95 ${transitioning ? 'scale-105' : 'scale-100'}`}
                                 src={slides[currentIndex].src}
                                 alt={slides[currentIndex].name} />
                         </Link>
 
                     </div>
 
-                    <div className="sm:flex sm:flex-col sm:gap-20"> 
+                    <div className="lg:flex lg:flex-col lg:gap-20 lg:w-[32rem] lg:mb-20  "> 
 
-                        <h1 className=" text-3xl text-center font-anta text-black invisible sm:visible ">
+                        <h1 className=" text-3xl text-center font-anta text-black invisible lg:visible">
                         Welcome to Cannie Companion
                         </h1>
 
-                        <p className="lg:text-justify  py-3 font-quick text-xl lg:text-2xl sm:items-center sm:w-96 lg:w-[40rem] lg:ml-8"> {slides[currentIndex].description} </p>
+                        <p className="h-20 py-3 font-quick text-sm lg:text-xl text-justify lg:items-center w-fit  lg:w-fit  lg:ml-8 "> {slides[currentIndex].description} </p>
 
                     </div>
 
@@ -77,7 +77,7 @@ const Carousel = () => {
 
 
                 <img src={RightNav} onClick={nextSlide}
-                    className="h-10 w-8 cursor-pointer mt-20 ml-auto sm:mt-0" />
+                    className="h-10 w-8 cursor-pointer mt-20 lg:ml-10 " />
 
 
             </div>

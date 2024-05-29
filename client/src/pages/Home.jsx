@@ -9,9 +9,9 @@ function Home() {
 
             <Header/>
 
-            <div className=" flex flex-col items-center rounded-lg bg-blue-200 pb-36">
+            <div className=" flex flex-col items-center  rounded-lg bg-stone-200 ">
 
-                <h1 className=" text-3xl text-center font-anta text-black pt-4 sm:hidden ">
+                <h1 className=" text-xl text-center font-anta text-black pt-4 lg:hidden ">
 
                     Welcome to Cannie Companion
 
