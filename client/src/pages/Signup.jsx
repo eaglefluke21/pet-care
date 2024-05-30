@@ -4,7 +4,7 @@ import Footer from "../components/Footer";
 import SignupImage from "../assets/gsdpups.jpg";
 import { NavLink } from "react-router-dom";
 import CryptoJS from 'crypto-js';
-import defaultText from '../utils/EncryptKey.js'
+import defaultText from '../utils/EncryptKey.js';
 import Popup from "../components/Popup.jsx";
 
 function Signup() {
@@ -51,12 +51,12 @@ function Signup() {
             if(responsestore.status === 201) {
                 setPopupVisible(true);                
             } else {
-                console.error('User creation failed', error);
+                console.error('User creation failed:', error);
             }
 
         } catch(error){
 
-            console.log("Error occured", error);
+            console.log("Error occured while creating User:", error);
         }
 
     };

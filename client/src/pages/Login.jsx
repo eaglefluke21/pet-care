@@ -5,8 +5,65 @@ import LoginImage from "../assets/AuShepherd.jpg";
 import Google from "../assets/google.svg";
 import Github from "../assets/github.svg";
 import { NavLink } from "react-router-dom";
+import CryptoJS from "crypto-js";
+import defaultText from '../utils/EncryptKey.js';
+import { useNavigate } from "react-router-dom";
 
 function Login() {
+
+    const navigate = useNavigate();
+    
+    const [Formdata, setFormdata] = useState({
+        email:'',
+        password:'',
+    })
+
+   const handleChange = (e) => {
+
+        setFormdata({
+            ...Formdata,[e.target.id] : e.target.value
+        })
+
+    }
+
+   const handleSubmit = async(e) => {
+
+        e.preventDefault();
+
+        try{
+
+            const backendurl = 'http://localhost:3000';
+            const url = `${backendurl}/users/login`;
+
+            const encryptedPassword = CryptoJS.AES.encrypt(Formdata.password,defaultText).toString();
+
+            const responsestore = await fetch(url,{
+                method:'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({...Formdata,password: encryptedPassword}),
+            });
+
+            const responsejson = await responsestore.json();
+            console.log(responsejson);
+
+            if(responsestore.status === 201) {
+                console.log("navigating to home page");
+                navigate('/');
+                           
+            } else {
+                console.error('User Login failed', error);
+            }
+
+
+
+        } catch(error) {
+            console.log("error occured while Logging In:",error)
+        }
+    }
+
+
 
     return (
         <div className="flex flex-col min-h-screen ">
@@ -14,18 +71,18 @@ function Login() {
 
         <div className="flex flex-col lg:flex-row lg:justify-evenly bg-blue-200 lg:bg-orange-100 py-16 rounded-md">
 
-            <div className="flex flex-col justify-center px-6 sm:px-40 lg:px-20 lg:w-[40rem]">
+            <form className="flex flex-col justify-center px-6 sm:px-40 lg:px-20 lg:w-[40rem]" onSubmit={handleSubmit}>
 
             <p className="font-quick text-3xl font-bold mb-10">Log In to Your Account</p>
 
             <div className="mb-10">
             <label className="font-quick text-lg font-bold "> Email Address </label>
-            <input id="email"  className="w-full border-gray-700  border rounded-md py-1 font-quick ps-4 font-semibold "></input>
+            <input id="email" value={Formdata.email} className="w-full border-gray-700  border rounded-md py-1 font-quick ps-4 font-semibold " onChange={handleChange}></input>
             </div>
 
             <div className="mb-10">
             <label className="font-quick text-lg font-bold "> Password </label>
-            <input id="password"  className="w-full border-gray-700  border rounded-md py-1 font-quick ps-4 font-semibold"></input>
+            <input id="password" value={Formdata.password} className="w-full border-gray-700  border rounded-md py-1 font-quick ps-4 font-semibold" onChange={handleChange}></input>
             </div>
 
             <p className="font-quick font-bold gap-0 hover:underline cursor-pointer ml-auto mb-2"> Forgot Password ?</p>
@@ -46,7 +103,7 @@ function Login() {
       <button className="w-1/2 bg-white rounded-md border-2  border-black font-quick font-semibold  text-black flex flex-row justify-center items-center gap-2"> <span> <img src={Github} className="h-8 w-8" /></span>Github</button>
       </div>
 
-            </div>  
+            </form>  
 
             <img src={LoginImage} className="rounded-md shadow-md object-cover invisible lg:visible"/>
 
