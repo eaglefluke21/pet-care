@@ -70,7 +70,7 @@ function Signup() {
 
         <Header/>
 
-        <div className="flex flex-col lg:flex-row lg:justify-evenly bg-orange-200 lg:bg-blue-100 py-16 rounded-md">
+        <div className="flex flex-col flex-grow lg:flex-row lg:justify-evenly bg-orange-200 lg:bg-blue-100 py-16 rounded-md">
 
 
 

@@ -48,14 +48,14 @@ const Carousel = () => {
             <div className="flex flex-row justify-center lg:items-center  rounded-md py-6 " >
 
                 <img src={LeftNav} onClick={prevSlide}
-                    className="h-10 w-8 cursor-pointer mt-20 lg:mr-10 " />
+                    className="h-10 w-8 cursor-pointer mt-20 lg:mr-20 " />
 
-                <div className="flex flex-col  lg:flex-row items-center lg:gap-6">
+                <div className="flex flex-col  lg:flex-row items-center lg:gap-10">
 
                     <div>
                         {/* <p className="text-xl font-anta text-center py-2"> {slides[currentIndex].name} </p> */}
                         <Link to={slides[currentIndex].route} >
-                            <img className={`h-72 w-80 lg:h-[30rem] lg:w-[28rem] shadow-md  shadow-white object-cover rounded-md transition-transform duration-700 transform hover:scale-95 ${transitioning ? 'scale-105' : 'scale-100'}`}
+                            <img className={`h-72 w-80 sm:h-[24rem] sm:w-[28rem] lg:h-[32rem] lg:w-[30rem] xl:h-auto xl:w-auto shadow-md  shadow-white object-cover rounded-md transition-transform duration-700 transform hover:scale-95 ${transitioning ? 'scale-105' : 'scale-100'}`}
                                 src={slides[currentIndex].src}
                                 alt={slides[currentIndex].name} />
                         </Link>
@@ -77,7 +77,7 @@ const Carousel = () => {
 
 
                 <img src={RightNav} onClick={nextSlide}
-                    className="h-10 w-8 cursor-pointer mt-20 lg:ml-10 " />
+                    className="h-10 w-8 cursor-pointer mt-20 lg:ml-20 " />
 
 
             </div>
