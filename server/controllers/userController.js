@@ -50,8 +50,18 @@ export async function userLogin(req,res) {
         jwtsecret,
         {expiresIn : '1h'},
         (err,token) => {
-            if (err) throw err;
-            res.status(201).json({token})
+            if (err) {
+                console.error('Error generating token:',err);
+                return res.status(500).json({msg:"Error generating token"});
+            }
+
+            res.cookie('token', token, {
+                httpOnly: true, 
+                secure: true, 
+                sameSite: 'strict' 
+              });
+
+            res.status(201).json({msg: "logged In"})
             console.log("logged In succesfully");
         }
     );
