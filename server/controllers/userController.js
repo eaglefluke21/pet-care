@@ -18,6 +18,8 @@ export function checkenv(req,res) {
 
 };
 
+
+
 // logic to check user credentials are valid or not 
 export async function userLogin(req,res) {
     const {email, password} = req.body;
@@ -55,9 +57,9 @@ export async function userLogin(req,res) {
                 return res.status(500).json({msg:"Error generating token"});
             }
 
-            res.cookie('token', token, {
+            res.cookie('usercookie', token, {
                 httpOnly: true, 
-                secure: true, 
+                secure: false, 
                 sameSite: 'strict' 
               });
 

@@ -7,6 +7,7 @@ import CryptoJS from 'crypto-js';
 import defaultText from '../utils/EncryptKey.js';
 import Popup from "../components/Popup.jsx";
 
+
 function Signup() {
 
     const[isPopupVisible , setPopupVisible] = useState(false);
