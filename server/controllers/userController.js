@@ -57,13 +57,7 @@ export async function userLogin(req,res) {
                 return res.status(500).json({msg:"Error generating token"});
             }
 
-            res.cookie('usercookie', token, {
-                httpOnly: true, 
-                secure: false, 
-                sameSite: 'strict' 
-              });
-
-            res.status(201).json({msg: "logged In"})
+            res.status(201).json({"jwt": token , msg : "jwt created!"})
             console.log("logged In succesfully");
         }
     );

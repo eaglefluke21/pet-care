@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React ,{ useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import LoginImage from "../assets/AuShepherd.jpg";
@@ -8,8 +8,30 @@ import { NavLink } from "react-router-dom";
 import CryptoJS from "crypto-js";
 import defaultText from '../utils/EncryptKey.js';
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 function Login() {
+
+    const [hasjwt,setjwt] = useState(false);
+
+
+    useEffect( ( )=> {
+
+        console.log('checking token state');
+
+         setjwt(!!sessionStorage.getItem('jwToken'));
+
+         console.log('value of hasjwt',hasjwt);
+
+    } , [hasjwt]);
+
+
+    const handlelogout = () => {
+
+        sessionStorage.removeItem('jwToken');
+        setjwt(false);
+    }
+
 
     const navigate = useNavigate();
     
@@ -46,9 +68,13 @@ function Login() {
             });
 
             const responsejson = await responsestore.json();
-            console.log(responsejson);
+            console.log("checking response",responsejson);
 
             if(responsestore.status === 201) {
+
+                const token = responsejson.jwt;
+                sessionStorage.setItem('jwToken',token);
+                
                 console.log("navigating to home page");
                 navigate('/');
                            
@@ -56,7 +82,7 @@ function Login() {
                 console.error('User Login failed', error);
             }
 
-
+           
 
         } catch(error) {
             console.log("error occured while Logging In:",error)
@@ -67,7 +93,7 @@ function Login() {
 
     return (
         <div className="flex flex-col min-h-screen ">
-        <Header/>
+        <Header hasjwt={hasjwt} handleLogout={handleLogout} />
 
         <div className="flex flex-col flex-grow lg:flex-row lg:justify-evenly bg-blue-200 lg:bg-orange-100 py-16 rounded-md">
 

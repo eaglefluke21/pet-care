@@ -3,7 +3,11 @@ import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import close from "../assets/close.svg"
 
-const NavLinks = () => {
+
+const NavLinks = ({ hasjwt, handleLogout }) => {
+
+
+
 
     return (
         <>
@@ -13,13 +17,13 @@ const NavLinks = () => {
             <NavLink to="/Training" className=" sm:text-xl font-quick  w-full text-center lg:w-auto hover:bg-gray-200 lg:hover:bg-transparent ">Training</NavLink>
             <NavLink to="/Health" className=" sm:text-xl font-quick  w-full text-center lg:w-auto hover:bg-gray-200 lg:hover:bg-transparent "> Health & Care</NavLink>
             <NavLink to="/Blog"className=" sm:text-xl font-quick  w-full text-center lg:w-auto hover:bg-gray-200 lg:hover:bg-transparent "> Blog</NavLink>
-            <NavLink to="/Login" className="lg:ml-auto lg:pr-8">  <button className="bg-black sm:py-2 sm:px-3 py-1 px-8 rounded-md text-sm font-quick text-white "> Log In</button> </NavLink>
+            <NavLink to="/Login" className="lg:ml-auto lg:pr-8"> {hasjwt ? (<button onClick={handleLogout}> Logout </button>) : ( <button className="bg-black sm:py-2 sm:px-3 py-1 px-8 rounded-md text-sm font-quick text-white "> Log In</button>)} </NavLink>
             </>
     )
 
 };
 
-const Nav = () => {
+const Nav = ({ hasjwt, handleLogout }) => {
     const [isOpen, SetIsOpen] = useState(false);
 
     const toggleNavbar = () => {
@@ -31,7 +35,7 @@ const Nav = () => {
         <>
         <nav className="">
         <div className="hidden lg:flex  gap-x-10 ">
-        <NavLinks/>
+        <NavLinks hasjwt={hasjwt} handleLogout={handleLogout}/>
         </div>
 
         <div className="lg:hidden">
