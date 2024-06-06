@@ -18,8 +18,8 @@ import Health from "./pages/Health";
       <Routes>
 
 
-        <Route path="/" element={<Home/>} />
-        <Route path="/Login" element={<Login/>} />
+        <Route path="/home" element={<Home/>} />
+        <Route path="/" element={<Login/>} />
         <Route path="/Signup" element={<Signup/>} />
         <Route path="/Breeds" element={<Breeds/>} />
         <Route path="/Training" element={<Training/>}/>

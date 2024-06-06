@@ -8,29 +8,11 @@ import { NavLink } from "react-router-dom";
 import CryptoJS from "crypto-js";
 import defaultText from '../utils/EncryptKey.js';
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+
 
 function Login() {
 
-    const [hasjwt,setjwt] = useState(false);
-
-
-    useEffect( ( )=> {
-
-        console.log('checking token state');
-
-         setjwt(!!sessionStorage.getItem('jwToken'));
-
-         console.log('value of hasjwt',hasjwt);
-
-    } , [hasjwt]);
-
-
-    const handlelogout = () => {
-
-        sessionStorage.removeItem('jwToken');
-        setjwt(false);
-    }
+   
 
 
     const navigate = useNavigate();
@@ -76,7 +58,7 @@ function Login() {
                 sessionStorage.setItem('jwToken',token);
                 
                 console.log("navigating to home page");
-                navigate('/');
+                navigate('/home');
                            
             } else {
                 console.error('User Login failed', error);
@@ -93,7 +75,7 @@ function Login() {
 
     return (
         <div className="flex flex-col min-h-screen ">
-        <Header hasjwt={hasjwt} handleLogout={handleLogout} />
+        <Header/>
 
         <div className="flex flex-col flex-grow lg:flex-row lg:justify-evenly bg-blue-200 lg:bg-orange-100 py-16 rounded-md">
 

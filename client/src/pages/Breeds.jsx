@@ -13,7 +13,7 @@ const Breeds= () => {
 
             <Header/>
 
-            <p>Find </p>
+           
 
             <Footer/>
 

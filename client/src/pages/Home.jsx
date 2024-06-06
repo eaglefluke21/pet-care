@@ -2,9 +2,28 @@ import Footer from "../components/Footer";
 import Header from "../components/Header";
 import Carousel from "../components/Carousel";
 import defaultText from "../utils/jwtKey.js";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 
 function Home() {
+
+    const navigate = useNavigate();
+
+    useEffect( ( )=> {
+        if(!sessionStorage.getItem('jwToken')){
+            navigate('/')
+        }
+        
+
+    } , []);
+
+
+    const handlelogout = () => {
+
+        sessionStorage.removeItem('jwToken');
+        
+    }
 
     return (
         <div className="flex flex-col min-h-screen ">

@@ -2,7 +2,7 @@ import React from 'react';
 import Logo from './Logo';
 import Nav from './Nav';
 
-const Header = ({ hasjwt, handleLogout }) => {
+const Header = () => {
     
     return (
         <>
@@ -10,7 +10,7 @@ const Header = ({ hasjwt, handleLogout }) => {
 
                   <Logo/>
                     
-                    <Nav hasjwt={hasjwt} handleLogout={handleLogout} />
+                    <Nav/>
 
             </header>
         </>
