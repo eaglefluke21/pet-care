@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import SignupImage from "../assets/Dalmatian.jpg";
+import AdminSignupImage from "../assets/bordercollie.jpg";
 import { NavLink } from "react-router-dom";
 import CryptoJS from 'crypto-js';
 import defaultText from '../utils/EncryptKey.js';
 import Popup from "../components/Popup.jsx";
 
 
-function Signup() {
+function AdminSignup() {
 
     const[isPopupVisible , setPopupVisible] = useState(false);
 
@@ -17,7 +17,7 @@ function Signup() {
         username:'',
         email:'',
         password:'',
-        role:'user',
+        role: 'admin',
     })
 
     const handleChange = (e) => {
@@ -35,7 +35,7 @@ function Signup() {
         try{
 
             const backendurl = 'http://localhost:3000';
-            const url = `${backendurl}/users/register`;
+            const url = `${backendurl}/users/adminregister`;
 
             const encryptedPassword = CryptoJS.AES.encrypt(Formdata.password,defaultText).toString();
 
@@ -43,7 +43,6 @@ function Signup() {
                 method:'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    
                 },
                 body: JSON.stringify({...Formdata,password: encryptedPassword}),
             });
@@ -73,16 +72,16 @@ function Signup() {
 
         <Header/>
 
-        <div className="flex flex-col flex-grow lg:flex-row lg:justify-evenly bg-orange-200 lg:bg-sky-100 py-16 rounded-md">
+        <div className="flex flex-col flex-grow lg:flex-row lg:justify-evenly bg-green-200 lg:bg-purple-100 py-16 rounded-md">
 
 
 
             <form className="flex flex-col justify-center px-6 sm:px-40 lg:px-20 lg:w-[40rem] " onSubmit={handleSubmit}>
 
-            <p className="font-quick text-3xl font-bold mb-10"> Create a new account</p>
+            <p className="font-quick text-3xl font-bold mb-10"> Create a Admin account</p>
 
             <div className="mb-10">
-            <label className="font-quick text-lg font-bold ">  Name </label>
+            <label className="font-quick text-lg font-bold "> Name </label>
             <input id="username" value={Formdata.username} className="w-full border-gray-700  border rounded-md py-1 font-quick ps-4 font-semibold " onChange={handleChange}></input>
             </div>
 
@@ -96,16 +95,16 @@ function Signup() {
             <input id="password" type="password" value={Formdata.password} className="w-full border-gray-700  border rounded-md py-1 font-quick ps-4 font-semibold" onChange={handleChange}></input>
             </div>
 
-            <NavLink to='/AdminSignup'> <span className="font-quick font-bold  hover:underline cursor-pointer ml-auto mb-2"> Create Admin Account ?</span> </NavLink>
-           
+            <NavLink to='/Signup'> <span className="font-quick font-bold  hover:underline cursor-pointer ml-auto mb-2"> Create a User Account ?</span> </NavLink>
+
             <button type="submit" className="w-full bg-black rounded-md py-1.5 font-quick font-semibold shadow-sm shadow-black text-white "> Sign Up</button>
 
-            <p className="font-quick font-semibold  mx-auto mt-2 "> Already Have an Account? <NavLink to="/"> <span className="font-quick font-bold hover:underline cursor-pointer">Log In.</span></NavLink></p>
+            <p className="font-quick font-semibold  mx-auto mt-2 "> Already Have an Account ? <NavLink to="/"> <span className="font-quick font-bold hover:underline cursor-pointer">Log In.</span></NavLink></p>
 
             </form>  
 
 
-            <img src={SignupImage} className="rounded-md shadow-md object-cover invisible lg:visible"/>
+            <img src={AdminSignupImage} className="rounded-md shadow-md object-cover invisible lg:visible"/>
 
 
 
@@ -114,7 +113,7 @@ function Signup() {
         <div>
             {
                 isPopupVisible && 
-                    <Popup message="User Created Successfully" onClose={closePopup} />
+                    <Popup message="Admin Created Successfully" onClose={closePopup} />
                 
             }
 
@@ -127,4 +126,4 @@ function Signup() {
 
 };
 
-export default Signup;
+export default AdminSignup;

@@ -4,11 +4,13 @@ import CryptoJS from "crypto-js";
 import dotenv from 'dotenv';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+
 connect();
 
 dotenv.config();
 
 const decryptKey = process.env.KEY; 
+
 const jwtsecret = process.env.JWT_SECRET;
 
 // function to check if decrypt key is working or not 
@@ -17,6 +19,12 @@ export function checkenv(req,res) {
     res.send({msg:decryptKey});
 
 };
+
+export function checkreq(req,res) {
+    res.send({msg: 'its me admin'})
+};
+
+
 
 
 
@@ -42,7 +50,8 @@ export async function userLogin(req,res) {
     // create payload for jwt 
     const payload = {
         user:{
-            id:user.id
+            id:user.id,
+            role:user.role,
         }
     };
 
@@ -68,10 +77,61 @@ export async function userLogin(req,res) {
     }
 }
 
+
+//logic to create admin account 
+
+export async function adminRegister(req,res) {
+    const { username, email , password ,role} = req.body;
+
+    
+
+    try {
+        
+    
+        const decryptedPassword = CryptoJS.AES.decrypt(password,decryptKey).toString(CryptoJS.enc.Utf8);
+    
+        console.log('orgpass',decryptedPassword);
+    
+        let user = await UserModel.findOne({email});
+    
+        if (user) {
+           return res.status(400).json({ msg : 'Admin already exists'});
+        }
+    
+        const hashedPassword = await bcrypt.hash(decryptedPassword,10);
+    
+        console.log('hash',hashedPassword);
+    
+        user = new UserModel({
+            username,
+            email,
+            password:hashedPassword,
+            role,
+        });
+    
+        await user.save();
+    
+        res.status(201).json(
+            {msg: 'User created sucessfully'  }
+        );
+    
+    
+    } catch (error) {
+    
+        console.error(error.message);
+        res.status(500).json({err:'Server Error'})
+    }
+    
+        console.log("route working");
+}
+
+
+
+
 // logic to create a user and save into db(Mongodb)
 export async function userRegister (req,res) {
 
-const { username, email , password} = req.body;
+const { username, email , password ,role} = req.body;
 
     
 
@@ -96,6 +156,7 @@ try {
         username,
         email,
         password:hashedPassword,
+        role,
     });
 
     await user.save();

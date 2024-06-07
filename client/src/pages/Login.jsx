@@ -12,7 +12,6 @@ import { useNavigate } from "react-router-dom";
 
 function Login() {
 
-   
 
 
     const navigate = useNavigate();
@@ -45,6 +44,7 @@ function Login() {
                 method:'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    
                 },
                 body: JSON.stringify({...Formdata,password: encryptedPassword}),
             });
@@ -97,7 +97,7 @@ function Login() {
 
             <button className="w-full bg-black rounded-md py-1.5 font-quick font-semibold shadow-sm shadow-black text-white "> Log In</button>
 
-            <p className="font-quick font-semibold  mx-auto mt-2 "> Don't Have an Account <NavLink to="/Signup"> <span className="font-quick font-bold hover:underline cursor-pointer">Create a New Account.</span></NavLink></p>
+            <p className="font-quick font-semibold  mx-auto mt-2 "> Don't Have an Account. <NavLink to="/Signup"> <span className="font-quick font-bold hover:underline cursor-pointer">Create a New Account.</span></NavLink></p>
             
 
             <div className="flex items-center justify-center w-full my-4">

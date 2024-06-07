@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import Breeds from "./pages/Breeds";
 import Adoption from "./pages/Adoption";
 import Signup from "./pages/Signup";
+import AdminSignup from "./pages/AdminSignup";
 import Training from "./pages/Training";
 import Blog from "./pages/Blog";
 import Health from "./pages/Health";
@@ -21,6 +22,7 @@ import Health from "./pages/Health";
         <Route path="/home" element={<Home/>} />
         <Route path="/" element={<Login/>} />
         <Route path="/Signup" element={<Signup/>} />
+        <Route path="/AdminSignup" element={<AdminSignup/>} />
         <Route path="/Breeds" element={<Breeds/>} />
         <Route path="/Training" element={<Training/>}/>
         <Route path="/Adoption" element={<Adoption/>} />
