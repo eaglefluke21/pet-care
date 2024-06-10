@@ -8,9 +8,15 @@ import AdminSignup from "./pages/AdminSignup";
 import Training from "./pages/Training";
 import Blog from "./pages/Blog";
 import Health from "./pages/Health";
+import userRole from "./utils/userRole";
+import NotAuthorized from "./utils/NotAuthorized";
+
+
+const BreedsWithRole = userRole(Breeds, [ 'admin']);
 
  function App() {
 
+ 
 
   return (
     <>
@@ -23,11 +29,12 @@ import Health from "./pages/Health";
         <Route path="/" element={<Login/>} />
         <Route path="/Signup" element={<Signup/>} />
         <Route path="/AdminSignup" element={<AdminSignup/>} />
-        <Route path="/Breeds" element={<Breeds/>} />
+        <Route path="/Breeds" element={<BreedsWithRole />} />
         <Route path="/Training" element={<Training/>}/>
         <Route path="/Adoption" element={<Adoption/>} />
         <Route path="/Blog" element={<Blog/>} />
         <Route path="/Health" element={<Health/>} />
+        <Route path="/noAuth" element={<NotAuthorized />} />
 
         
 

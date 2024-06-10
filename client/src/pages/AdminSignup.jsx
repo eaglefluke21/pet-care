@@ -4,7 +4,7 @@ import Footer from "../components/Footer";
 import AdminSignupImage from "../assets/bordercollie.jpg";
 import { NavLink } from "react-router-dom";
 import CryptoJS from 'crypto-js';
-import defaultText from '../utils/EncryptKey.js';
+import cryptoEncrypt from "../utils/cyptoEncrypt.jsx";
 import Popup from "../components/Popup.jsx";
 
 
@@ -32,12 +32,15 @@ function AdminSignup() {
 
         e.preventDefault();
 
+       
+
         try{
+            const cryptoKey = await cryptoEncrypt();
 
             const backendurl = 'http://localhost:3000';
             const url = `${backendurl}/users/adminregister`;
 
-            const encryptedPassword = CryptoJS.AES.encrypt(Formdata.password,defaultText).toString();
+            const encryptedPassword = CryptoJS.AES.encrypt(Formdata.password,cryptoKey).toString();
 
             const responsestore = await fetch(url,{
                 method:'POST',

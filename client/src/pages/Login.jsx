@@ -6,7 +6,7 @@ import Google from "../assets/google.svg";
 import Github from "../assets/github.svg";
 import { NavLink } from "react-router-dom";
 import CryptoJS from "crypto-js";
-import defaultText from '../utils/EncryptKey.js';
+import cryptoEncrypt from "../utils/cyptoEncrypt";
 import { useNavigate } from "react-router-dom";
 
 
@@ -33,12 +33,19 @@ function Login() {
 
         e.preventDefault();
 
+        
+
+      
+
+
+
         try{
+            const cryptoKey = await cryptoEncrypt();
 
             const backendurl = 'http://localhost:3000';
             const url = `${backendurl}/users/login`;
 
-            const encryptedPassword = CryptoJS.AES.encrypt(Formdata.password,defaultText).toString();
+            const encryptedPassword = CryptoJS.AES.encrypt(Formdata.password,cryptoKey).toString();
 
             const responsestore = await fetch(url,{
                 method:'POST',

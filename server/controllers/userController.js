@@ -16,7 +16,7 @@ const jwtsecret = process.env.JWT_SECRET;
 // function to check if decrypt key is working or not 
 export function checkenv(req,res) {
 
-    res.send({msg:decryptKey});
+    res.send({msg : decryptKey});
 
 };
 
@@ -25,10 +25,15 @@ export function checkreq(req,res) {
 };
 
 
+// logic to send key for encryption 
+export async function cryptoEncryption(req,res) {
+        res.send({msgkey: decryptKey});
+}
 
 
 
-// logic to check user credentials are valid or not 
+
+// logic fo Login
 export async function userLogin(req,res) {
     const {email, password} = req.body;
     try {
@@ -128,7 +133,7 @@ export async function adminRegister(req,res) {
 
 
 
-// logic to create a user and save into db(Mongodb)
+// logic for user account
 export async function userRegister (req,res) {
 
 const { username, email , password ,role} = req.body;
@@ -175,4 +180,17 @@ try {
     console.log("route working");
 }
 
+
+//logic to request password reset
+
+export async function forgotPassword(req,res) {
+
+}
+
+
+//logic to reset password
+
+export async function resetPassword(req,res){
+
+};
 

@@ -1,7 +1,6 @@
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import Carousel from "../components/Carousel";
-import defaultText from "../utils/jwtKey.js";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
