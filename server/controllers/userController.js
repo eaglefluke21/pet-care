@@ -4,6 +4,7 @@ import CryptoJS from "crypto-js";
 import dotenv from 'dotenv';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import { sendResetEmail } from "../utils/email.js";
 
 connect();
 
@@ -185,12 +186,43 @@ try {
 
 export async function forgotPassword(req,res) {
 
+    const { email } = req.body;
+    const user = await User.findOne({ email });
+    if (!user) return res.status(404).send('User not found');
+  
+    const token = crypto.randomBytes(32).toString('hex');
+    const tokenExpiry = Date.now() + 3600000; // 1 hour
+  
+    user.resetPasswordToken = token;
+    user.resetPasswordExpires = tokenExpiry;
+    await user.save();
+  
+    sendResetEmail(email, token);
+    res.send('Password reset email sent');
+
 }
 
 
 //logic to reset password
 
 export async function resetPassword(req,res){
+
+    const { token } = req.params;
+  const { password } = req.body;
+  const user = await User.findOne({
+    resetPasswordToken: token,
+    resetPasswordExpires: { $gt: Date.now() },
+  });
+
+  if (!user) return res.status(400).send('Invalid or expired token');
+
+  const hashedPassword = await bcrypt.hash(password, 10);
+  user.password = hashedPassword;
+  user.resetPasswordToken = undefined;
+  user.resetPasswordExpires = undefined;
+  await user.save();
+
+  res.send('Password reset successful');
 
 };
 

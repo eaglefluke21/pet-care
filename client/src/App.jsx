@@ -10,7 +10,8 @@ import Blog from "./pages/Blog";
 import Health from "./pages/Health";
 import userRole from "./utils/userRole";
 import NotAuthorized from "./utils/NotAuthorized";
-
+import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
 
 const BreedsWithRole = userRole(Breeds, [ 'admin']);
 
@@ -35,6 +36,9 @@ const BreedsWithRole = userRole(Breeds, [ 'admin']);
         <Route path="/Blog" element={<Blog/>} />
         <Route path="/Health" element={<Health/>} />
         <Route path="/noAuth" element={<NotAuthorized />} />
+        <Route path="/forgot-password" element= {<ForgotPassword/>} />
+        <Route path="/reset-password/:token" element= {<ResetPassword/>} />
+
 
         
 

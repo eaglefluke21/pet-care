@@ -7,7 +7,7 @@ const EMAIL = process.env.EMAIL;
 const backendurl = 'http://localhost:3000';
 
 
-export const sendRestEmail = () => {
+export const sendResetEmail = () => {
     const resetUrl = `${backendurl}/users/reset-password/${token}`;
     const mailOptions = {
         from: EMAIL,
