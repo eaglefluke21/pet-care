@@ -1,14 +1,14 @@
-import { transporter } from "../config/nodemailer";
+import { transporter } from "../config/nodemailer.js";
 import dotenv from 'dotenv';
 
 dotenv.config();
 
 const EMAIL = process.env.EMAIL;
-const backendurl = 'http://localhost:3000';
+const frontendurl = 'http://localhost:5173';
 
 
-export const sendResetEmail = () => {
-    const resetUrl = `${backendurl}/users/reset-password/${token}`;
+export const sendResetEmail = (email,token) => {
+    const resetUrl = `${frontendurl}/reset-password/${token}`;
     const mailOptions = {
         from: EMAIL,
         to: email,

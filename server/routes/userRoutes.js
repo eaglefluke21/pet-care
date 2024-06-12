@@ -26,6 +26,7 @@ function userRoutes () {
     router.post('/login',userLogin);
 
     router.post('/forgot-password',forgotPassword);
+
     router.post('/reset-password/:token', resetPassword);
     
 

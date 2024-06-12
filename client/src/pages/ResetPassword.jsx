@@ -1,52 +1,119 @@
 import React from "react";
 import { useState } from "react";
-import {useParams} from "react-router-dom"
+import {useParams} from "react-router-dom";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import Popup from "../components/Popup";
+import ResetPasswordImage from "../assets/frenchbulldog.jpg"
 
 const ResetPassword = () => {
     const {token} = useParams();
     const [password, setPassword] = useState('');
-    const [message, setMessage] = useState('');
+    const[isPopupVisible , setPopupVisible] = useState(false);
+
+   
 
     const handleSubmit = async(e) => {
         e.preventDefault();
 
         try{
-            const response = await fetch (`/users/forgot-password/${token}`,{
+
+            const backendurl = 'http://localhost:3000';
+            const url = `${backendurl}/users/reset-password/${token}`;
+            const response = await fetch (url,{
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json'},
                 body: JSON.stringify({password}),
             });
 
             const responseData = await response.json();
-            setMessage(responseData);
+            if(responseData.status === 201) {
+                setPopupVisible(true);                
+            } else {
+                console.error('Reset password failed:', error);
+            }
 
 
         } catch(error){
-            setMessage('Error sending password reset email');
+        
             console.error(error);
 
         }
-    }
+    };
+    const closePopup = () => {
+        setPopupVisible(false);
+    };
 
 
 
 
 return (
-    <div>
-        <p> Reset Password</p>
-        <form onSubmit={handleSubmit}>
-            <label>
-                New Password:
-                <input type="password" value={password} onChange={(e)=> setPassword(e.target.value)}
-                required
-                />
-            </label>
-            <button type="submit">Reset Password</button>
-        </form>
+    // <div>
+    //     <p> Reset Password</p>
+    //     <form onSubmit={handleSubmit}>
+    //         <label>
+    //             New Password:
+    //             <input type="password" value={password} onChange={(e)=> setPassword(e.target.value)}
+    //             required
+    //             />
+    //         </label>
+    //         <button type="submit">Reset Password</button>
+    //     </form>
 
-        {message && <p> {message}</p>}
+    //     {message && <p> {message}</p>}
 
+    // </div>
+
+    <div className="flex flex-col min-h-screen ">
+
+<Header/>
+
+<div className="flex flex-col flex-grow lg:flex-row lg:justify-evenly bg-rose-200 lg:bg-cyan-100 py-16 rounded-md">
+
+
+
+    <form className="flex flex-col justify-center px-6 sm:px-40 lg:px-20 lg:w-[40rem] " onSubmit={handleSubmit}>
+
+    <p className="font-quick text-3xl font-bold mb-10"> Set New Password ?</p>
+
+   
+
+    <div className="mb-10">
+    <label className="font-quick text-lg font-bold "> New Password </label>
+    <input type="password" value={password} onChange={(e)=> setPassword(e.target.value)} className="w-full border-gray-700  border rounded-md py-1 font-quick ps-4 font-semibold " ></input>
     </div>
+
+
+  
+
+    <button type="submit" className="w-full bg-black rounded-md py-1.5 font-quick font-semibold shadow-sm shadow-black text-white "> Create New Password</button>
+
+    
+
+    </form>  
+
+
+    <img src={ResetPasswordImage} className="rounded-md shadow-md object-cover invisible lg:visible"/>
+
+
+
+</div>
+
+<div>
+{
+                isPopupVisible && 
+                    <Popup message="Reset email sent successfully " onClose={closePopup} />
+                
+            }
+
+</div>
+
+<Footer/>
+
+</div>
+
+
+
 );
 };
 

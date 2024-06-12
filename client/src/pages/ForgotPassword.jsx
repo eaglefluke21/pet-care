@@ -1,50 +1,102 @@
 import React from "react";
 import { useState } from "react";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import ForgotPasswordImage from "../assets/sulimovdog.jpg";
+import Popup from "../components/Popup";
 
 const ForgotPassword = () => {
+
+    const[isPopupVisible , setPopupVisible] = useState(false);
     const [email, setEmail] = useState('');
-    const [message, setMessage] = useState('');
 
     const handleSubmit = async(e) => {
         e.preventDefault();
 
         try{
-            const response = await fetch ('/users/forgot-password',{
+
+            const backendurl = 'http://localhost:3000';
+            const url = `${backendurl}/users/forgot-password`;
+
+            const response = await fetch (url,{
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json'},
                 body: JSON.stringify({email}),
             });
 
             const responseData = await response.json();
-            setMessage(responseData);
 
+            if(responseData.status === 201) {
+                setPopupVisible(true);                
+            } else {
+                console.log('Reset email failed:', error);
+            }
 
         } catch(error){
-            setMessage('Error sending password reset email');
             console.error(error);
 
         }
-    }
+
+        
+    };
+
+    const closePopup = () => {
+        setPopupVisible(false);
+    };
 
 
 
 
 return (
-    <div>
-        <p> Forgot Password</p>
-        <form onSubmit={handleSubmit}>
-            <label>
-                Email:
-                <input type="email" value={email} onChange={(e)=> setEmail(e.target.value)}
-                required
-                />
-            </label>
-            <button type="submit">Send Reset Link</button>
-        </form>
 
-        {message && <p> {message}</p>}
+<div className="flex flex-col min-h-screen ">
 
+<Header/>
+
+<div className="flex flex-col flex-grow lg:flex-row lg:justify-evenly bg-amber-200 lg:bg-red-100 py-16 rounded-md">
+
+
+
+    <form className="flex flex-col justify-center px-6 sm:px-40 lg:px-20 lg:w-[40rem] " onSubmit={handleSubmit}>
+
+    <p className="font-quick text-3xl font-bold mb-10"> Forgot Password ?</p>
+
+   
+
+    <div className="mb-10">
+    <label className="font-quick text-lg font-bold "> Email Address </label>
+    <input type="email" value={email} onChange={(e)=> setEmail(e.target.value)} className="w-full border-gray-700  border rounded-md py-1 font-quick ps-4 font-semibold " ></input>
     </div>
+
+
+  
+
+    <button type="submit" className="w-full bg-black rounded-md py-1.5 font-quick font-semibold shadow-sm shadow-black text-white "> Send Reset Link</button>
+
+    
+
+    </form>  
+
+
+    <img src={ForgotPasswordImage} className="rounded-md shadow-md object-cover invisible lg:visible"/>
+
+
+
+</div>
+
+<div>
+{
+                isPopupVisible && 
+                    <Popup message="Reset email sent successfully " onClose={closePopup} />
+                
+            }
+
+</div>
+
+<Footer/>
+
+</div>
+
 );
 };
 

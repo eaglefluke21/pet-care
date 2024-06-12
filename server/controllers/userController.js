@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { sendResetEmail } from "../utils/email.js";
+import crypto from 'crypto';
 
 connect();
 
@@ -187,8 +188,8 @@ try {
 export async function forgotPassword(req,res) {
 
     const { email } = req.body;
-    const user = await User.findOne({ email });
-    if (!user) return res.status(404).send('User not found');
+    const user = await UserModel.findOne({ email });
+    if (!user) return res.status(404).json({ msg : 'User Not found'});
   
     const token = crypto.randomBytes(32).toString('hex');
     const tokenExpiry = Date.now() + 3600000; // 1 hour
@@ -198,7 +199,9 @@ export async function forgotPassword(req,res) {
     await user.save();
   
     sendResetEmail(email, token);
-    res.send('Password reset email sent');
+    res.status(201).json(
+        {msg: 'Password reset email sent'  }
+    );
 
 }
 
@@ -209,12 +212,12 @@ export async function resetPassword(req,res){
 
     const { token } = req.params;
   const { password } = req.body;
-  const user = await User.findOne({
+  const user = await UserModel.findOne({
     resetPasswordToken: token,
     resetPasswordExpires: { $gt: Date.now() },
   });
 
-  if (!user) return res.status(400).send('Invalid or expired token');
+  if (!user) return res.status(400).json({msg:'Invalid or expired token'});
 
   const hashedPassword = await bcrypt.hash(password, 10);
   user.password = hashedPassword;
@@ -222,7 +225,9 @@ export async function resetPassword(req,res){
   user.resetPasswordExpires = undefined;
   await user.save();
 
-  res.send('Password reset successful');
+  res.status(201).json(
+    {msg: 'Password reset successful'  }
+);
 
 };
 

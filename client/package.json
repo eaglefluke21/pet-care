@@ -9,6 +9,7 @@
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
+
   "dependencies": {
     "crypto-js": "^4.2.0",
     "jsonwebtoken": "^9.0.2",
