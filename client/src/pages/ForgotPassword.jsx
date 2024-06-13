@@ -25,15 +25,16 @@ const ForgotPassword = () => {
             });
 
             const responseData = await response.json();
+            console.log(responseData);
 
-            if(responseData.status === 201) {
+            if(response.status === 201) {
                 setPopupVisible(true);                
             } else {
-                console.log('Reset email failed:', error);
+                console.error('Reset email failed',error);
             }
 
         } catch(error){
-            console.error(error);
+            console.log("error occoured",error);
 
         }
 

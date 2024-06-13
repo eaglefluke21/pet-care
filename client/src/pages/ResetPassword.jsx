@@ -27,7 +27,9 @@ const ResetPassword = () => {
             });
 
             const responseData = await response.json();
-            if(responseData.status === 201) {
+            console.log(responseData);
+
+            if(response.status === 201) {
                 setPopupVisible(true);                
             } else {
                 console.error('Reset password failed:', error);
@@ -36,7 +38,7 @@ const ResetPassword = () => {
 
         } catch(error){
         
-            console.error(error);
+            console.log('Error Reseting Email ',error);
 
         }
     };
@@ -102,7 +104,7 @@ return (
 <div>
 {
                 isPopupVisible && 
-                    <Popup message="Reset email sent successfully " onClose={closePopup} />
+                    <Popup message="Password reset succesfull " onClose={closePopup} />
                 
             }
 
