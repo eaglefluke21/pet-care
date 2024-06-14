@@ -1,12 +1,14 @@
 import passport from 'passport';
 import GoogleStrategy from 'passport-google-oauth20';
-import OauthUserModel from '../models/OauthUser';
+import dotenv from 'dotenv';
+import OauthUserModel from '../models/OauthUserSchema.js';
 
+dotenv.config();
 
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: "/auth/google/callback"
+    callbackURL: "http://localhost:3000/OauthRoutes/google/callback"
   },
   async (accessToken, refreshToken, profile, done) => {
     try {
@@ -48,3 +50,6 @@ passport.deserializeUser(async (id, done) => {
     done(err, false);
   }
 });
+
+
+export default passport;

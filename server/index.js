@@ -4,33 +4,51 @@ import dotenv from 'dotenv';
 import userRoutes from './routes/userRoutes.js';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
+import session from 'express-session';
+import passport from './utils/passportGoogle.js';
+import OauthRoutes from './routes/OauthRoutes.js'
 
 dotenv.config();
-
-const app = express();
-
-app.use(express.json());
-
-app.use(cors({
-    origin: 'http://localhost:5173',
-    credentials:true
-}));
-
-app.use(cookieParser());
-
-app.options('*', cors());
 const port = process.env.PORT;
 
-console.log(port);
+const app = express();
+app.use(express.json());
+app.use(cookieParser());
+
+const corsOptions = {
+    origin: 'http://localhost:5173', // Replace with your frontend URL
+    credentials: true // Enable credentials
+  };
+  app.use(cors(corsOptions));
+
+// Express session
+app.use(session({
+    secret: 'secret',
+    resave: false,
+    saveUninitialized: true
+}));
+
+//passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
 
 app.get('/', function(req,res){
     
-    res.send(" working !!!!");
+    res.send(" Home Page");
 })
 
+app.get('/dashboard', (req, res) => {
+    res.send('Dashboard Page');
+  });
 
-// Using Route handlers
+
+// User route handler
 app.use('/users',userRoutes());
+
+
+// passportjs route handle
+app.use('/OauthRoutes',OauthRoutes)
 
 
 app.listen(port , function(){

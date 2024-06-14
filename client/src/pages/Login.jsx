@@ -9,6 +9,8 @@ import CryptoJS from "crypto-js";
 import cryptoEncrypt from "../utils/cyptoEncrypt";
 import { useNavigate } from "react-router-dom";
 
+import GoogleLoginButton from "../components/GoogleLoginButton";
+
 
 function Login() {
 
@@ -114,7 +116,7 @@ function Login() {
       </div>
 
         <div className="flex flex-row justify-center gap-8 ">
-      <button className="w-1/2 bg-white rounded-md border-2  border-black font-quick font-semibold  text-black flex flex-row justify-center items-center gap-2"> <span> <img src={Google} className="h-10 w-10"/></span> Google </button>
+      <NavLink to="/google" className="w-1/2 bg-white rounded-md border-2  border-black font-quick font-semibold  text-black flex flex-row justify-center items-center gap-2"> <span> <img src={Google} className="h-10 w-10"/></span> Google </NavLink>
       <button className="w-1/2 bg-white rounded-md border-2  border-black font-quick font-semibold  text-black flex flex-row justify-center items-center gap-2"> <span> <img src={Github} className="h-8 w-8" /></span>Github</button>
       </div>
 
