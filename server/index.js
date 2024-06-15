@@ -16,10 +16,14 @@ app.use(express.json());
 app.use(cookieParser());
 
 const corsOptions = {
-    origin: 'http://localhost:5173', // Replace with your frontend URL
-    credentials: true // Enable credentials
-  };
-  app.use(cors(corsOptions));
+  origin: 'http://localhost:5173', // Replace with your frontend URL
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true // Allow credentials (cookies, authorization headers, etc.)
+};
+app.use(cors(corsOptions));
+
+app.options('*', cors(corsOptions));
 
 // Express session
 app.use(session({

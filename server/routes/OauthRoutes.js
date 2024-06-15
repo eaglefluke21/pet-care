@@ -1,6 +1,6 @@
 import { Router } from "express";
 import passport from "passport";
-
+import createJwt from "../utils/createJwt.js";
 
  const router = Router();
 
@@ -13,10 +13,12 @@ import passport from "passport";
 router.get('/google/callback', 
   passport.authenticate('google', { failureRedirect: '/' }),
   (req, res) => {
-    // Successful authentication, redirect or respond with token
-    const token = generateToken(req.user); // Replace with your token generation logic
-    res.cookie('jwt', token, { httpOnly: true }); // Set JWT token in cookie
-    res.redirect('http://localhost:5173/home'); // Redirect to frontend URL
+ 
+    const token = createJwt(req.user); 
+    console.log('logging token from backend', token);
+    const redirectUrl = `http://localhost:5173/google-callback?token=${token}`;
+    console.log('Redirecting to:', redirectUrl); // Log the redirect URL
+    res.redirect(redirectUrl);
   }
 );
 

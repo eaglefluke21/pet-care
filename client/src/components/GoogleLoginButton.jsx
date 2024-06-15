@@ -7,33 +7,9 @@ const GoogleLoginButton = () => {
     
   const handleGoogleLogin = async () => {
 
-    try {
-        
+    window.location.href = 'http://localhost:3000/OauthRoutes/google'
 
-        const backendurl = 'http://localhost:3000';
-            const url = `${backendurl}/OauthRoutes/google`;
-      const response = await fetch(url, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        // Ensure credentials are sent with the request
-        credentials: 'include'
-      });
-
-      if (response.ok) {
-        navigate('/home');
-        
-      } else {
-        // Handle error response
-        const errorMessage = await response.text();
-        console.error('Google login error:', errorMessage);
-        // Optionally show an error message to the user
-      }
-    } catch (error) {
-      console.error('Error during Google login:', error);
-      // Handle network or other errors
-    }
+    
   };
 
   return (

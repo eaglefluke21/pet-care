@@ -17,7 +17,7 @@ const OauthUserSchema = new mongoose.Schema({
     },
     lastName: {
         type: String,
-        required: true
+        required: false
     },
     image: {
         type:String

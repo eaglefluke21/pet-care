@@ -13,6 +13,7 @@ import NotAuthorized from "./utils/NotAuthorized";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
 import GoogleLoginButton from "./components/GoogleLoginButton";
+import GoogleCallback from "./components/GoogleCallback";
 
 const BreedsWithRole = userRole(Breeds, [ 'admin']);
 
@@ -40,7 +41,7 @@ const BreedsWithRole = userRole(Breeds, [ 'admin']);
         <Route path="/forgot-password" element= {<ForgotPassword/>} />
         <Route path="/reset-password/:token" element= {<ResetPassword/>} />
         <Route path="/google" element={<GoogleLoginButton/>}/>
-
+        <Route path="/google-callback" element={<GoogleCallback />} />
 
         
 
