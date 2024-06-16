@@ -15,7 +15,7 @@ import ResetPassword from "./pages/ResetPassword";
 import GoogleLoginButton from "./components/GoogleLoginButton";
 import GoogleCallback from "./components/GoogleCallback";
 
-const BreedsWithRole = userRole(Breeds, [ 'admin']);
+const BreedsWithRole = userRole(Breeds, [ 'user']);
 
  function App() {
 
