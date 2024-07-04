@@ -37,10 +37,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-app.get('/', function(req,res){
-    
-    res.send(" Home Page");
-})
 
 app.get('/dashboard', (req, res) => {
     res.send('Dashboard Page');

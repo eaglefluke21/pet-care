@@ -13,6 +13,9 @@ const Breeds= () => {
 
             <Header/>
 
+
+            <h2> Look for you favourite breeds </h2>
+
            
 
             <Footer/>
