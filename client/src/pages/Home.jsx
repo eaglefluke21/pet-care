@@ -27,26 +27,26 @@ function Home() {
     return (
         <div className="flex flex-col min-h-screen ">
 
-            <Header />
+    <Header />
 
-            <div className=" flex flex-col items-center flex-grow justify-center  rounded-lg bg-stone-200  lg:pb-0">
+    <div className=" flex flex-col items-center flex-grow justify-center  rounded-lg bg-white  lg:pb-0">
 
-                <h1 className=" text-xl text-center font-anta text-black pt-4 lg:hidden ">
+        <h1 className=" text-xl text-center font-anta text-black pt-4 sm:hidden ">
 
-                    Welcome to Cannie Companion
+            Welcome to Cannine Companion.
 
-                </h1>
+        </h1>
 
-                <Carousel />
-
-
-            </div>
-
-            <Footer />
+        <Carousel />
 
 
+    </div>
 
-        </div>
+    <Footer />
+
+
+
+</div>
 
 
     )

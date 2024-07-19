@@ -24,9 +24,9 @@ const NavLinks = () => {
             <NavLink to="/home" className="  sm:text-xl font-quick  w-full text-center lg:w-auto hover:bg-gray-200 lg:hover:bg-transparent  "> Home</NavLink>
             <NavLink to="/Breeds" className="  sm:text-xl font-quick   w-full text-center lg:w-auto hover:bg-gray-200 lg:hover:bg-transparent "> Breeds</NavLink>
             <NavLink to="/Adoption" className=" sm:text-xl font-quick w-full text-center lg:w-auto hover:bg-gray-200 lg:hover:bg-transparent ">Adoption</NavLink>
-            <NavLink to="/Training" className=" sm:text-xl font-quick  w-full text-center lg:w-auto hover:bg-gray-200 lg:hover:bg-transparent ">Training</NavLink>
             <NavLink to="/Health" className=" sm:text-xl font-quick  w-full text-center lg:w-auto hover:bg-gray-200 lg:hover:bg-transparent "> Health & Care</NavLink>
             <NavLink to="/Blog" className=" sm:text-xl font-quick  w-full text-center lg:w-auto hover:bg-gray-200 lg:hover:bg-transparent "> Blog</NavLink>
+            <NavLink to="/Admin" className=" sm:text-xl font-quick  w-full text-center lg:w-auto hover:bg-gray-200 lg:hover:bg-transparent ">Admin</NavLink>
             <NavLink to="/" className="lg:ml-auto lg:pr-8"> {isLoggedIn ? (<button onClick={handleLogout} className="bg-black sm:py-2 sm:px-3 py-1 px-8 rounded-md text-sm font-quick text-white "> Logout </button>) : (<button className="bg-black sm:py-2 sm:px-3 py-1 px-8 rounded-md text-sm font-quick text-white "> Log In</button>)  }  </NavLink>
         </>
     )

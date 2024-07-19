@@ -5,7 +5,7 @@ import Breeds from "./pages/Breeds";
 import Adoption from "./pages/Adoption";
 import Signup from "./pages/Signup";
 import AdminSignup from "./pages/AdminSignup";
-import Training from "./pages/Training";
+import Admin from "./pages/Admin";
 import Blog from "./pages/Blog";
 import Health from "./pages/Health";
 import userRole from "./utils/userRole";
@@ -15,7 +15,7 @@ import ResetPassword from "./pages/ResetPassword";
 import GoogleLoginButton from "./components/GoogleLoginButton";
 import GoogleCallback from "./components/GoogleCallback";
 
-const BreedsWithRole = userRole(Breeds, [ 'user']);
+const RoleBase = userRole(Admin, [ 'admin']);
 
  function App() {
 
@@ -32,8 +32,8 @@ const BreedsWithRole = userRole(Breeds, [ 'user']);
         <Route path="/" element={<Login/>} />
         <Route path="/Signup" element={<Signup/>} />
         <Route path="/AdminSignup" element={<AdminSignup/>} />
-        <Route path="/Breeds" element={<BreedsWithRole />} />
-        <Route path="/Training" element={<Training/>}/>
+        <Route path="/Breeds" element={<Breeds />} />
+        <Route path="/Admin" element={<RoleBase />} />
         <Route path="/Adoption" element={<Adoption/>} />
         <Route path="/Blog" element={<Blog/>} />
         <Route path="/Health" element={<Health/>} />
