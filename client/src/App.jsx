@@ -15,6 +15,8 @@ import ResetPassword from "./pages/ResetPassword";
 import GoogleLoginButton from "./components/GoogleLoginButton";
 import GoogleCallback from "./components/GoogleCallback";
 
+import AdminAdopt from "./components/AdminAdopt";
+
 const RoleBase = userRole(Admin, [ 'admin']);
 
  function App() {
@@ -33,7 +35,7 @@ const RoleBase = userRole(Admin, [ 'admin']);
         <Route path="/Signup" element={<Signup/>} />
         <Route path="/AdminSignup" element={<AdminSignup/>} />
         <Route path="/Breeds" element={<Breeds />} />
-        <Route path="/Admin" element={<RoleBase />} />
+        <Route path="/Admin/*" element={<RoleBase />} />
         <Route path="/Adoption" element={<Adoption/>} />
         <Route path="/Blog" element={<Blog/>} />
         <Route path="/Health" element={<Health/>} />

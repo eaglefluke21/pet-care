@@ -7,7 +7,7 @@ const Carousel = () => {
     return (
         <>
         
-            <div className="flex flex-row justify-center lg:items-center  rounded-md py-6 " >
+            <div className="flex flex-row justify-center items-center  rounded-md py-6" >
 
                
 
@@ -16,13 +16,15 @@ const Carousel = () => {
                     <div className="max-w-xl  ">
                         
                     <SliderCarousel/>
+
+                   
                            
     
                     </div>
 
                     <div className="sm:flex sm:flex-col sm:gap-20 sm:w-[32rem] sm:mb-20  "> 
 
-                        <h1 className=" text-3xl text-center font-quick text-black invisible sm:visible">
+                        <h1 className=" text-3xl text-center font-quick text-black hidden sm:block">
                         New Pup, New Parent? Find Everything You Need to Raise a Happy, Healthy Dog
                         </h1>
 

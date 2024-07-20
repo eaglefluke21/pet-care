@@ -29,15 +29,19 @@ function Home() {
 
     <Header />
 
-    <div className=" flex flex-col items-center flex-grow justify-center  rounded-lg bg-white  lg:pb-0">
+    <div className=" flex flex-col items-center  justify-center  rounded-lg  lg:pb-0">
 
-        <h1 className=" text-xl text-center font-anta text-black pt-4 sm:hidden ">
+       
 
-            Welcome to Cannine Companion.
+        <h1 className=" text-sm text-center font-quick text-black pt-4 font-medium p-2 sm:hidden ">
+
+        New Pup, New Parent? Find Everything You Need to Raise a Happy, Healthy Dog
 
         </h1>
 
         <Carousel />
+
+       
 
 
     </div>

@@ -1,11 +1,41 @@
 import React from "react";
+import { useState } from "react";
+import {  useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Sidebar from "../components/Sidebar";
+import AdminBreed from "../components/AdminBreed";
+import AdminAdopt from "../components/AdminAdopt";
+import AdminBlog from "../components/AdminBlog";
+import AdminHealthCare from "../components/AdminHealthCare";
 
 
 function Admin () {
+const navigate = useNavigate();
+const [activeComponent, setActiveComponent] = useState('AdminBreed');
 
+const handleSidebarClick = (component) => {
+    console.log('checking if handleSidebarClick is invoked');
+    setActiveComponent(component);
+
+};
+
+let ComponentToRender;
+switch(activeComponent) {
+    case'AdminAdopt':
+    ComponentToRender = AdminAdopt;
+    break;
+    case'AdminBlog':
+    ComponentToRender = AdminBlog;
+    break;
+    case'AdminHealthCare':
+    ComponentToRender = AdminHealthCare
+    break;
+    case 'AdminBreed':
+        default:
+            ComponentToRender = AdminBreed;
+            break;
+}
 
     return (
         
@@ -14,55 +44,11 @@ function Admin () {
 <Header/>
 
 
-
+<Sidebar onNavClick={handleSidebarClick}/>
 
 <div className="flex flex-col flex-grow lg:flex-row lg:justify-evenly bg-green-200 lg:bg-red-100 py-16  rounded-md">
-<Sidebar/>
 
-
-    <form className="flex flex-col justify-center px-6 sm:px-40 lg:px-20 lg:w-[40rem] " >
-
-    <p className="font-quick text-3xl font-bold mb-10"> Add New Breeds</p>
-
-   
-
-    <div className="mb-10">
-    <label className="font-quick text-lg font-bold "> Breed Name </label>
-    <input type="text" className="w-full border-gray-700  border rounded-md py-1 font-quick ps-4 font-semibold " ></input>
-    </div>
-
-    <div className="mb-10">
-    <label className="font-quick text-lg font-bold "> Type </label>
-    <input type="text" className="w-full border-gray-700  border rounded-md py-1 font-quick ps-4 font-semibold " ></input>
-    </div>
-
-    <div className="mb-10">
-    <label className="font-quick text-lg font-bold "> Characteristics </label>
-    <input type="text" className="w-full border-gray-700  border rounded-md py-1 font-quick ps-4 font-semibold " ></input>
-    </div>
-
-    <div className="mb-10">
-    <label className="font-quick text-lg font-bold "> Breed Name </label>
-    <input type="text" className="w-full border-gray-700  border rounded-md py-1 font-quick ps-4 font-semibold " ></input>
-    </div>
-
-    
-    <div>        
-<label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white" >Upload file</label>
-<input className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file"/>
-    </div>
-
-
-  
-
-    <button  className="w-full bg-black rounded-md py-1.5 font-quick font-semibold shadow-sm shadow-black text-white "> Add Data</button>
-
-    
-
-    </form>  
-
-
-
+<ComponentToRender/>
 
 
 

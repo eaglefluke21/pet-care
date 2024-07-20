@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
-import Homesvg from "../assets/home.svg";
-import Bagsvg from "../assets/bag.svg";
-import Accountsvg from "../assets/account.svg";
-import Dashboardsvg from "../assets/dashboard.svg";
-import Datasvg from "../assets/data.svg";
+import Breedssvg from "../assets/breeds.svg";
+import Adoptsvg from "../assets/adopt.svg";
+import Healthcaresvg from "../assets/healthcare.svg";
+import Blogsvg from "../assets/blog.svg";
 import Sidebarsvg from "../assets/sidebar.svg";
 
-const Sidebar = () => {
+
+
+const Sidebar = ({onNavClick}) => {
   const [isNavVisible, setIsNavVisible] = useState(false);
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
   const navRef = useRef(null);
@@ -15,9 +16,9 @@ const Sidebar = () => {
     setIsNavVisible(!isNavVisible);
   };
 
-  const toggleDropdown = () => {
-    setIsDropdownVisible(!isDropdownVisible);
-  };
+  // const toggleDropdown = () => {
+  //   setIsDropdownVisible(!isDropdownVisible);
+  // };
 
   const handleClickOutside = (event) => {
     if (navRef.current && !navRef.current.contains(event.target)) {
@@ -43,43 +44,41 @@ const Sidebar = () => {
         id="nav"
       >
         <ul>
-          <li className="relative top-20">
-            <span className="flex items-center text-lg rounded-lg hover:bg-gray-400">
-              <img src={Homesvg} className="h-11 w-7 m-2" alt="Home" /> Home
-            </span>
-          </li>
+         
 
-          <li className="relative top-20">
+          <li className="relative top-20 " onClick={() => onNavClick('AdminBreed')}>
             <span
               className="flex items-center text-lg rounded-lg hover:bg-gray-400"
-              onClick={toggleDropdown}
+              // onClick={toggleDropdown}
             >
-              <img src={Bagsvg} className="h-12 w-8 m-2" alt="Items" /> Items
+              <img src={Breedssvg} className="h-12 w-8 m-2" alt="Items" /> Breeds
             </span>
-            <ul
+            {/* <ul
               className={`text-lg ${isDropdownVisible ? '' : 'hidden'} md:text-xl`}
               id="dropdown"
             >
               <li className="hover:bg-gray-300 rounded-lg ml-4 mb-2">All Items</li>
               <li className="hover:bg-gray-300 rounded-lg ml-4">Cart</li>
-            </ul>
+            </ul> */}
           </li>
 
-          <li className="relative top-20">
+          
+          <li className="relative top-20" onClick={() => onNavClick('AdminAdopt')}>
             <span className="flex items-center text-lg rounded-lg hover:bg-gray-400">
-              <img src={Accountsvg} className="h-12 w-8 m-2" alt="Account" /> Account
+             <img src={Adoptsvg} className="h-12 w-8 m-2" alt="Account" /> Adoption 
+            </span>
+          </li>
+          
+
+          <li className="relative top-20" onClick={()=> onNavClick('AdminHealthCare')}>
+            <span className="flex items-center text-lg rounded-lg hover:bg-gray-400">
+              <img src={Healthcaresvg} className="h-12 w-8 m-2" alt="Admin" /> Health & care
             </span>
           </li>
 
-          <li className="relative top-20">
+          <li className="relative top-20" onClick={() => onNavClick('AdminBlog')}>
             <span className="flex items-center text-lg rounded-lg hover:bg-gray-400">
-              <img src={Dashboardsvg} className="h-12 w-8 m-2" alt="Admin" /> Admin
-            </span>
-          </li>
-
-          <li className="relative top-20">
-            <span className="flex items-center text-lg rounded-lg hover:bg-gray-400">
-              <img src={Datasvg} className="h-12 w-8 m-2" alt="Data" /> Data
+              <img src={Blogsvg} className="h-12 w-8 m-2" alt="Data" /> Blog
             </span>
           </li>
         </ul>
