@@ -1,7 +1,7 @@
 import passport from 'passport';
 import GoogleStrategy from 'passport-google-oauth20';
 import dotenv from 'dotenv';
-import OauthUserModel from '../models/OauthUserSchema.js';
+import UserModel from '../models/User.js';
 
 dotenv.config();
 
@@ -12,21 +12,21 @@ passport.use(new GoogleStrategy({
   },
   async (accessToken, refreshToken, profile, done) => {
     try {
-      // Check if user already exists in our DB
-      let user = await OauthUserModel.findOne({ googleId: profile.id });
+   
+      let user = await UserModel.findOne({ googleId: profile.id });
 
       if (user) {
         return done(null, user);
       }
 
-      // If not, create a new user
-      user = new OauthUserModel({
+     
+      user = new UserModel({
         googleId: profile.id,
-        displayName: profile.displayName,
-        firstName: profile.name.givenName,
-        lastName: profile.name.familyName,
-        image: profile.photos[0].value,
-        email: profile.emails[0].value
+        username: profile.displayName,
+        email: profile.emails[0].value,
+        image: profile.photos[0].value
+        
+        
       });
 
       await user.save();
@@ -44,7 +44,7 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser(async (id, done) => {
   try {
-    const user = await OauthUserModel.findById(id);
+    const user = await UserModel.findById(id);
     done(null, user);
   } catch (err) {
     done(err, false);

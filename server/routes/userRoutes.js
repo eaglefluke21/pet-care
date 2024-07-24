@@ -1,5 +1,4 @@
 import { Router } from "express";
-// Importing Controllers
 import { userRegister } from "../controllers/userController.js";
 import { adminRegister } from "../controllers/userController.js";
 import { userLogin } from "../controllers/userController.js";
@@ -18,6 +17,8 @@ function userRoutes () {
 
 
     router.get('/getEncryptkey',cryptoEncryption);
+
+   
 
     router.post('/register',userRegister);
 

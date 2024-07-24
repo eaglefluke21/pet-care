@@ -15,7 +15,6 @@ import ResetPassword from "./pages/ResetPassword";
 import GoogleLoginButton from "./components/GoogleLoginButton";
 import GoogleCallback from "./components/GoogleCallback";
 
-import AdminAdopt from "./components/AdminAdopt";
 
 const RoleBase = userRole(Admin, [ 'admin']);
 

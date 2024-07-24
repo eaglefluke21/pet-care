@@ -140,14 +140,20 @@ export async function userRegister (req,res) {
 
 const { username, email , password ,role} = req.body;
 
-    
 
 try {
     
+    
+
+    console.log("password value",password);
 
     const decryptedPassword = CryptoJS.AES.decrypt(password,decryptKey).toString(CryptoJS.enc.Utf8);
 
-    console.log('orgpass',decryptedPassword);
+    console.log('decrypted password ',decryptedPassword);
+
+    if (!decryptedPassword || decryptedPassword.trim() === "") {
+        return res.status(400).json({ msg: 'Password is required for email signup' });
+      }
 
     let user = await UserModel.findOne({email});
 
@@ -192,7 +198,7 @@ export async function forgotPassword(req,res) {
     if (!user) return res.status(404).json({ msg : 'User Not found'});
   
     const token = crypto.randomBytes(32).toString('hex');
-    const tokenExpiry = Date.now() + 3600000; // 1 hour
+    const tokenExpiry = Date.now() + 3600000; 
   
     user.resetPasswordToken = token;
     user.resetPasswordExpires = tokenExpiry;

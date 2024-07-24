@@ -1,6 +1,5 @@
 import express from 'express';
 import dotenv from 'dotenv';
-// Importing route handlers
 import userRoutes from './routes/userRoutes.js';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
@@ -16,23 +15,23 @@ app.use(express.json());
 app.use(cookieParser());
 
 const corsOptions = {
-  origin: 'http://localhost:5173', // Replace with your frontend URL
+  origin: 'http://localhost:5173', 
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true // Allow credentials (cookies, authorization headers, etc.)
+  credentials: true 
 };
 app.use(cors(corsOptions));
 
 app.options('*', cors(corsOptions));
 
-// Express session
+
 app.use(session({
     secret: 'secret',
     resave: false,
     saveUninitialized: true
 }));
 
-//passport middleware
+
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -43,11 +42,11 @@ app.get('/dashboard', (req, res) => {
   });
 
 
-// User route handler
+
 app.use('/users',userRoutes());
 
 
-// passportjs route handle
+
 app.use('/OauthRoutes',OauthRoutes)
 
 

@@ -13,21 +13,21 @@ const RoleCheck = (roles = []) => {
  return (req,res,next) => {
     
     const authHeader = req.headers.authorization;
-    console.log('Authorization Header:', authHeader); // Log the header for debugging
+    console.log('Authorization Header:', authHeader); 
 
     if (!authHeader) {
       return res.status(401).send({ message: 'Access denied. No Auth Header.' });
     }
 
     const token = authHeader.split(' ')[1];
-    console.log('Extracted Token:', token); // Log the token for debugging
+    console.log('Extracted Token:', token); 
 
     if (!token) {
       return res.status(401).send({ message: 'Access denied. No token provided.' });
     }
     try{
         const decoded = jwt.verify(token, jwtsecret);
-        // req.user = decoded;
+        
 
         if(roles.length && !roles.includes(decoded.user.role)){
             return res.status(401).send({message: 'Acess denied. Do not have the right role', checktoken : decoded})

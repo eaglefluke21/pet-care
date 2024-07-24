@@ -75,7 +75,7 @@ function AdminSignup() {
 
         <Header/>
 
-        <div className="flex flex-col flex-grow lg:flex-row lg:justify-evenly bg-green-200 lg:bg-purple-100 py-16 rounded-md">
+        <div className="flex flex-col flex-grow lg:flex-row lg:justify-evenly bg-gradient-to-r from-purple-100 to-purple-200 py-16 rounded-md">
 
 
 
@@ -107,7 +107,7 @@ function AdminSignup() {
             </form>  
 
 
-            <img src={AdminSignupImage} className="rounded-md shadow-md object-cover invisible lg:visible"/>
+            <img src={AdminSignupImage} className="rounded-md shadow-md object-cover hidden lg:block"/>
 
 
 

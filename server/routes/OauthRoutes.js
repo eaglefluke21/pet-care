@@ -1,6 +1,7 @@
 import { Router } from "express";
 import passport from "passport";
 import createJwt from "../utils/createJwt.js";
+import UserModel from "../models/User.js";
 
  const router = Router();
 
@@ -12,18 +13,39 @@ import createJwt from "../utils/createJwt.js";
 
 router.get('/google/callback', 
   passport.authenticate('google', { failureRedirect: '/' }),
-  (req, res) => {
+  async(req, res) => {
+
+    console.log(req.user.googleId);
+
+    let user = await UserModel.findOne({ googleId: req.user.googleId });
+
+    if(user){
+      return res.redirect(`http://localhost:5173/home`)
+    }
+
+      if (!user) {
+
+        return res.redirect(`http://localhost:5173/login?error=user_not_found`);
+      }
  
     const token = createJwt(req.user); 
     console.log('logging token from backend', token);
     const redirectUrl = `http://localhost:5173/google-callback?token=${token}`;
-    console.log('Redirecting to:', redirectUrl); // Log the redirect URL
+    console.log('Redirecting to:', redirectUrl); 
     res.redirect(redirectUrl);
   }
 );
 
-// @desc    Logout user
-// @route   /auth/logout
+
+router.get('/checkOauthuser', (req,res) => {
+
+});
+
+
+
+
+
+
 router.get('/logout', (req, res) => {
   req.logout();
   res.redirect('/');

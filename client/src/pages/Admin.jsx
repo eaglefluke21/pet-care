@@ -46,7 +46,7 @@ switch(activeComponent) {
 
 <Sidebar onNavClick={handleSidebarClick}/>
 
-<div className="flex flex-col flex-grow lg:flex-row lg:justify-evenly bg-green-200 lg:bg-red-100 py-16  rounded-md">
+<div className="flex flex-col flex-grow lg:flex-row lg:justify-evenly bg-yellow-300 py-16  rounded-md">
 
 <ComponentToRender/>
 

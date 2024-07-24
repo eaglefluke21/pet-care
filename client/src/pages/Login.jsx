@@ -3,7 +3,6 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import LoginImage from "../assets/AuShepherd.jpg";
 import Google from "../assets/google.svg";
-import Github from "../assets/github.svg";
 import { NavLink } from "react-router-dom";
 import CryptoJS from "crypto-js";
 import cryptoEncrypt from "../utils/cyptoEncrypt";
@@ -69,6 +68,7 @@ function Login() {
                 navigate('/home');
                            
             } else {
+                alert("Invalid email or password");
                 console.error('User Login failed', error);
             }
 
@@ -80,12 +80,25 @@ function Login() {
     }
 
 
+    const handleGoogleLogin = async () => {
+
+        try {
+            
+            window.location.href = 'http://localhost:3000/OauthRoutes/google';
+          } catch (error) {
+            console.error('Error initiating Google login:', error);
+          }
+
+    
+        
+      };
+
 
     return (
         <div className="flex flex-col min-h-screen ">
         <Header/>
 
-        <div className="flex flex-col flex-grow lg:flex-row lg:justify-evenly bg-blue-200 lg:bg-yellow-100 py-16 rounded-md">
+        <div className="flex flex-col flex-grow lg:flex-row lg:justify-evenly bg-gradient-to-r from-sky-100 to-sky-200 py-16 rounded-md">
 
             <form className="flex flex-col justify-center px-6 sm:px-40 lg:px-20 lg:w-[40rem]" onSubmit={handleSubmit}>
 
@@ -110,18 +123,17 @@ function Login() {
 
             <div className="flex items-center justify-center w-full my-4">
         <hr className="border-t-2 border-black w-1/4 mr-4"/>
-        <p className="text-black  font-anta text-md">Or Continue with</p>
+        <p className="text-black  font-anta text-md">continue with</p>
         <hr className="border-t-2 border-black w-1/4 ml-4"/>
       </div>
 
         <div className="flex flex-row justify-center gap-8 ">
-      <NavLink to="/google" className="w-1/2 bg-white rounded-md border-2  border-black font-quick font-semibold  text-black flex flex-row justify-center items-center gap-2"> <span> <img src={Google} className="h-10 w-10"/></span> Google </NavLink>
-      <button className="w-1/2 bg-white rounded-md border-2  border-black font-quick font-semibold  text-black flex flex-row justify-center items-center gap-2"> <span> <img src={Github} className="h-8 w-8" /></span>Github</button>
+      <button onClick={handleGoogleLogin} className="w-3/4 bg-white rounded-md border-2  border-black font-quick font-semibold  text-black flex flex-row justify-center items-center gap-2"> <span> <img src={Google} className="h-10 w-10"/></span> Google </button>
       </div>
 
             </form>  
 
-            <img src={LoginImage} className="rounded-md shadow-md object-cover invisible lg:visible"/>
+            <img src={LoginImage} className="rounded-md shadow-md object-cover hidden lg:block"/>
 
         </div>
 

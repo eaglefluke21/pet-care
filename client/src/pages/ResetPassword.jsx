@@ -70,7 +70,7 @@ return (
 
 <Header/>
 
-<div className="flex flex-col flex-grow lg:flex-row lg:justify-evenly bg-rose-200 lg:bg-cyan-100 py-16 rounded-md">
+<div className="flex flex-col flex-grow lg:flex-row lg:justify-evenly bg-gradient-to-r from-cyan-100 to-cyan-200 py-16 rounded-md">
 
 
 
@@ -95,7 +95,7 @@ return (
     </form>  
 
 
-    <img src={ResetPasswordImage} className="rounded-md shadow-md object-cover invisible lg:visible"/>
+    <img src={ResetPasswordImage} className="rounded-md shadow-md object-cover hidden lg:block"/>
 
 
 
