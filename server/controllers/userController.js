@@ -54,7 +54,6 @@ export async function userLogin(req,res) {
         return res.status(400).json({msg:"Password did not match"});
     }
 
-    // create payload for jwt 
     const payload = {
         user:{
             id:user.id,
@@ -62,7 +61,6 @@ export async function userLogin(req,res) {
         }
     };
 
-    // Generate jwt token
     jwt.sign(
         payload,
         jwtsecret,

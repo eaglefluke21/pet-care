@@ -1,33 +1,20 @@
 import { Router } from "express";
-import passport from "passport";
+import { loginPassport } from "../utils/LoginpassportGoogle.js";
+import { signupPassport } from "../utils/SignuppassportGoogle.js";
 import createJwt from "../utils/createJwt.js";
-import UserModel from "../models/User.js";
 
  const router = Router();
 
- router.get('/google', passport.authenticate('google', {
+ router.get('/google/signup', signupPassport.authenticate('google-signup', {
   scope: ['profile', 'email'],
   session: false 
 }));
 
 
-router.get('/google/callback', 
-  passport.authenticate('google', { failureRedirect: '/' }),
-  async(req, res) => {
+router.get('/google/signup/callback', 
+  signupPassport.authenticate('google-signup', { failureRedirect: '/' }),
+  (req, res) => {
 
-    console.log(req.user.googleId);
-
-    let user = await UserModel.findOne({ googleId: req.user.googleId });
-
-    if(user){
-      return res.redirect(`http://localhost:5173/home`)
-    }
-
-      if (!user) {
-
-        return res.redirect(`http://localhost:5173/login?error=user_not_found`);
-      }
- 
     const token = createJwt(req.user); 
     console.log('logging token from backend', token);
     const redirectUrl = `http://localhost:5173/google-callback?token=${token}`;
@@ -37,11 +24,24 @@ router.get('/google/callback',
 );
 
 
-router.get('/checkOauthuser', (req,res) => {
+router.get('/google/login', loginPassport.authenticate('google-login', {
+  scope: ['profile', 'email'],
+  session: false 
+}));
 
-});
 
+router.get('/google/login/callback', 
+  loginPassport.authenticate('google-login', { failureRedirect: '/login?error=user_not_found' }),
+  (req, res) => {
+    if (!req.user) {
+      return res.redirect('/login?error=user_doesnt_exist');
+    }
 
+    const token = createJwt(req.user);
+    const redirectUrl = `http://localhost:5173/google-callback?token=${token}`;
+    res.redirect(redirectUrl);
+  }
+);
 
 
 

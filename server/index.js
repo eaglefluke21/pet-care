@@ -4,7 +4,8 @@ import userRoutes from './routes/userRoutes.js';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
-import passport from './utils/passportGoogle.js';
+import { signupPassport } from './utils/SignuppassportGoogle.js';
+import { loginPassport } from './utils/LoginpassportGoogle.js';
 import OauthRoutes from './routes/OauthRoutes.js'
 
 dotenv.config();
@@ -32,8 +33,10 @@ app.use(session({
 }));
 
 
-app.use(passport.initialize());
-app.use(passport.session());
+app.use(loginPassport.initialize());
+app.use(loginPassport.session());
+app.use(signupPassport.initialize());
+app.use(signupPassport.session());
 
 
 

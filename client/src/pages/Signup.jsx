@@ -79,7 +79,7 @@ function Signup() {
       
   const handleGoogleLogin = async () => {
 
-    window.location.href = 'http://localhost:3000/OauthRoutes/google'
+    window.location.href = 'http://localhost:3000/OauthRoutes/google/signup'
 
     
   };

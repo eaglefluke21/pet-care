@@ -82,13 +82,7 @@ function Login() {
 
     const handleGoogleLogin = async () => {
 
-        try {
-            
-            window.location.href = 'http://localhost:3000/OauthRoutes/google';
-          } catch (error) {
-            console.error('Error initiating Google login:', error);
-          }
-
+        window.location.href = 'http://localhost:3000/OauthRoutes/google/login';
     
         
       };
