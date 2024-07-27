@@ -34,7 +34,7 @@ function Signup() {
 
         e.preventDefault();
 
-
+     
 
 
         try{

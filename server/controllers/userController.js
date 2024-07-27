@@ -6,6 +6,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { sendResetEmail } from "../utils/email.js";
 import crypto from 'crypto';
+import AdminBreedModel from "../models/AdminBreeds.js";
 
 connect();
 
@@ -235,3 +236,47 @@ export async function resetPassword(req,res){
 
 };
 
+
+
+// Upload Breeds data
+
+export async function AdminBreed(req,res) {
+    try{
+        const {breedname, group , lifespan,size,origin,description} = req.body;
+        const image = req.file ? req.file.filename : '';
+
+        const newBreed = new AdminBreedModel({
+            breedname,
+            group,
+            lifespan,
+            size,
+            origin,
+            description,
+            image
+        });
+
+        await newBreed.save();
+        res.status(201).json(newBreed);
+
+    } catch(error){
+        res.status(500).json({error: 'Failed to add breed'});
+    }
+
+};
+
+
+//fetch breeds data
+
+export async function Breeds(req,res) {
+    try {
+
+        const breeds  = await AdminBreedModel.find();
+
+        res.status(200).json(breeds);
+
+
+
+    }catch(error) {
+        res.status(500).json({error: 'Failed to Fetch breeds'});
+    }
+    };

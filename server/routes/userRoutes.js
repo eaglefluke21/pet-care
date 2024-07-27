@@ -8,6 +8,9 @@ import { cryptoEncryption } from "../controllers/userController.js";
 import RoleCheck from "../middleware/roleCheck.js";
 import { forgotPassword } from "../controllers/userController.js";
 import { resetPassword } from "../controllers/userController.js";
+import { AdminBreed } from "../controllers/userController.js";
+import { Breeds } from "../controllers/userController.js";
+import upload from "../middleware/uploadMiddleware.js";
 
 function userRoutes () {
     const router = Router();
@@ -18,7 +21,7 @@ function userRoutes () {
 
     router.get('/getEncryptkey',cryptoEncryption);
 
-   
+   router.get('/breeds',Breeds);
 
     router.post('/register',userRegister);
 
@@ -29,6 +32,9 @@ function userRoutes () {
     router.post('/forgot-password',forgotPassword);
 
     router.post('/reset-password/:token', resetPassword);
+
+    router.post('/adminbreeds', upload.single('image'), AdminBreed);
+
     
 
     return router;

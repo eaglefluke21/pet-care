@@ -7,6 +7,8 @@ import session from 'express-session';
 import { signupPassport } from './utils/SignuppassportGoogle.js';
 import { loginPassport } from './utils/LoginpassportGoogle.js';
 import OauthRoutes from './routes/OauthRoutes.js'
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 dotenv.config();
 const port = process.env.PORT;
@@ -49,9 +51,13 @@ app.get('/dashboard', (req, res) => {
 app.use('/users',userRoutes());
 
 
-
 app.use('/OauthRoutes',OauthRoutes)
 
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.listen(port , function(){
     console.log(`server is listening at http://localhost:${port}`);
