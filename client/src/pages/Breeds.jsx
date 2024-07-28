@@ -45,14 +45,14 @@ const Breeds = () => {
                 <h1 className="text-white font-quick sm:text-3xl text-xl font-bold">Look for your favourite Breeds.</h1>
                 <div className="flex flex-wrap justify-center gap-4">
                     {breeds.map((breed) => (
-                        <div key={breed._id} className="bg-white p-4 rounded-lg shadow-md ">
+                        <div key={breed._id} className="bg-sky-200 p-4 rounded-lg shadow-md w-[40rem] ">
                             <h2 className="text-xl font-bold">{breed.breedname}</h2>
                             <p><strong>Group:</strong> {breed.group}</p>
                             <p><strong>LifeSpan:</strong> {breed.lifespan}</p>
                             <p><strong>Size:</strong> {breed.size}</p>
                             <p><strong>Origin:</strong> {breed.origin}</p>
                             <p><strong>Description:</strong> {breed.description}</p>
-                            {breed.image && <img src={`${url}/uploads/${breed.image}`} alt={breed.breedname} className="w-full h-auto mt-2" />}
+                            {breed.image && <img src={`${url}/uploads/${breed.image}`} alt={breed.breedname} className="w-[40rem] h-auto mt-2" />}
                         </div>
                     ))}
                 </div>

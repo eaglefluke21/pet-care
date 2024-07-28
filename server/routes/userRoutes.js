@@ -11,6 +11,9 @@ import { resetPassword } from "../controllers/userController.js";
 import { AdminBreed } from "../controllers/userController.js";
 import { Breeds } from "../controllers/userController.js";
 import upload from "../middleware/uploadMiddleware.js";
+import { updateBreed } from "../controllers/userController.js";
+import { deleteBreed } from "../controllers/userController.js";
+
 
 function userRoutes () {
     const router = Router();
@@ -34,6 +37,10 @@ function userRoutes () {
     router.post('/reset-password/:token', resetPassword);
 
     router.post('/adminbreeds', upload.single('image'), AdminBreed);
+
+    router.put('/adminbreeds/:id',upload.single('image'), updateBreed);
+
+    router.delete('/adminBreeds/:id', deleteBreed);
 
     
 

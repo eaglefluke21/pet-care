@@ -7,6 +7,12 @@ import jwt from 'jsonwebtoken';
 import { sendResetEmail } from "../utils/email.js";
 import crypto from 'crypto';
 import AdminBreedModel from "../models/AdminBreeds.js";
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 connect();
 
@@ -280,3 +286,76 @@ export async function Breeds(req,res) {
         res.status(500).json({error: 'Failed to Fetch breeds'});
     }
     };
+
+
+// update breeds data
+
+export async function updateBreed(req, res) {
+    try {
+        const { id } = req.params;
+        const { breedname, group, lifespan, size, origin, description } = req.body;
+        let image = req.file ? req.file.filename : '';
+
+        const breed = await AdminBreedModel.findById(id);
+
+        if (!breed) {
+            return res.status(404).json({ error: 'Breed not found' });
+        }
+
+        if (req.file) {
+            // Delete old image if new image is provided
+            const oldImagePath = path.join(__dirname, '..', 'uploads', breed.image);
+
+            fs.unlink(oldImagePath, (err) => {
+                if (err) {
+                    console.error('Failed to delete old image', err);
+                }
+            });
+        } else {
+            image = breed.image; // If no new image, keep the old image path
+        }
+
+        const updatedBreed = await AdminBreedModel.findByIdAndUpdate(
+            id,
+            { breedname, group, lifespan, size, origin, description, image },
+            { new: true }
+        );
+
+        res.status(200).json(updatedBreed);
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to update breed' });
+    }
+}
+
+
+
+// Delete Breeds
+
+
+export async function deleteBreed(req, res) {
+    try {
+        const { id } = req.params;
+
+        const breed = await AdminBreedModel.findById(id);
+
+        if (!breed) {
+            return res.status(404).json({ error: 'Breed not found' });
+        }
+
+        const imagePath = path.join(__dirname, '..', 'uploads', breed.image);
+
+        await AdminBreedModel.findByIdAndDelete(id);
+
+        fs.unlink(imagePath, (err) => {
+            if (err) {
+                console.error('Failed to delete image', err);
+                return res.status(500).json({ error: 'Failed to delete image' });
+            }
+
+            res.status(200).json({ message: 'Breed deleted successfully' });
+        });
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to delete breed' });
+    }
+}
+
