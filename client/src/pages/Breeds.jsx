@@ -5,12 +5,6 @@ import apiAxios from "../services/api";
 
 const Breeds = () => {
 
-    const [filter, setFilter] = useState({
-        group:'',
-        size:'',
-        lifespan:'',
-    })
-
     const url = 'http://localhost:3000';
 
     const [breeds, setBreeds] = useState([]); 
