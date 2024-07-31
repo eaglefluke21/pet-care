@@ -22,7 +22,7 @@ const AdminBreed = () => {
 
     useEffect(() => {
         fetchBreeds();
-    }
+    } 
         , []);
 
     const fetchBreeds = async () => {
@@ -194,7 +194,14 @@ const AdminBreed = () => {
 
                         <div className="w-full">
                             <label className="block mb-2 text-sm font-bold text-gray-900 font-quick ">Group</label>
-                            <input type="text" id="group" value={Formdata.group} className="bg-white  text-gray-900 text-sm rounded-lg  block w-full p-2.5 " onChange={handleChange} placeholder="group" required />
+                            <select type="text" id="group" value={Formdata.group} className="bg-white  text-gray-900 text-sm rounded-lg  block w-full p-2.5 " onChange={handleChange} placeholder="group" required >
+
+                            <option >Select category</option>
+                                <option value="Herding">Herding</option>
+                                <option value="Hound">Hound</option>
+                                <option value="Working">Working</option>
+                                <option value="Guard">Guard</option>
+                                </select>
                         </div>
 
                         <div className="w-full">

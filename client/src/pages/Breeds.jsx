@@ -8,6 +8,11 @@ const Breeds = () => {
     const url = 'http://localhost:3000';
 
     const [breeds, setBreeds] = useState([]); 
+    const [filteredBreeds, setFilteredBreeds] = useState([]);
+    const [filters, setFilters] = useState({
+        group:"",
+        size:""
+    });
    
     useEffect(() => {
         
@@ -36,14 +41,94 @@ const Breeds = () => {
         fetchBreeds(); 
     }, []); 
 
+
+    useEffect(() => {
+        const filterBreeds = () => {
+
+            let filtered = breeds;
+
+            if (filters.group) {
+                filtered = filtered.filter(breed => breed.group === filters.group);
+            }
+
+            if(filters.size){
+                filtered = filtered.filter(breed=> breed.size === filters.size);
+
+            }
+
+            setFilteredBreeds(filtered);
+
+        };
+
+        filterBreeds();
+
+    },[filters, breeds]);
+
+    const handleFilterChange = (e) => {
+        const {name, value}  = e.target;
+        setFilters(prevFilters => ({
+            ...prevFilters,
+            [name]:value
+        }));
+
+    };
+
+    
+
     
     return (
         <div className="flex flex-col min-h-screen bg-white">
             <Header />
             <div className="flex flex-col gap-4 justify-center items-center flex-grow">
                 <h1 className="text-sky-700 font-quick sm:text-3xl text-xl font-bold">Dog  Breeds.</h1>
+
+
+
+                <div className="mb-4">
+                    <label className="mr-2">Group:</label>
+                    <select
+                        name="group"
+                        value={filters.group}
+                        onChange={handleFilterChange}
+                        className="p-2 border rounded"
+                    >
+                        <option value="">All</option>
+                        <option value="Herding">Herding</option>
+                        <option value="Hound">Hound</option>
+                        <option value="Working">Working</option>
+                        <option value="Guard">Guard</option>
+                        {/* Add more options as needed */}
+                    </select>
+                </div>
+
+                <div className="mb-4">
+                    <label className="mr-2">Size</label>
+                    <select
+                        name="size"
+                        value={filters.size}
+                        onChange={handleFilterChange}
+                        className="p-2 border rounded"
+                    >
+                        <option value="">All</option>
+                        <option value="small">Small</option>
+                        <option value="medium">Medium</option>
+                        <option value="large">Large</option>
+                        <option value="giant">Giant</option>
+                        {/* Add more options as needed */}
+                    </select>
+                </div>
+
+
+
+
+
+
+
+
+
+
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-center gap-2 ">
-                    {breeds.map((breed) => (
+                    {filteredBreeds.map((breed) => (
                         <div key={breed._id} className=" flex flex-col bg-gradient-to-r from-cyan-100 to-blue-100 shadow-inner shadow-gray-200 p-4 rounded-lg font-quick   ">
                             <h2 className="text-xl font-bold">{breed.breedname}</h2>
                             <p><strong>Group:</strong> {breed.group}</p>
@@ -55,6 +140,11 @@ const Breeds = () => {
                         </div>
                     ))}
                 </div>
+
+
+
+
+
             </div>
             <Footer />
         </div>
