@@ -95,7 +95,9 @@ const AdminBreed = () => {
 
         const data = new FormData();
         Object.keys(Formdata).forEach(key => {
+            if (key !== 'image' || Formdata[key] !== null) {
             data.append(key, Formdata[key]);
+            }
         });
 
         try {
@@ -136,9 +138,14 @@ const AdminBreed = () => {
         }
     };
 
+    
+
     const handleSelect = (breed) => {
-        console.log("Selected breed data:", breed); // Debugging log
         setSelectedBreed(breed);
+
+        // const url = 'http://localhost:3000';
+        // const imageUrl = breed.image ?`${url}/uploads/${breed.image}`: null;
+       
         setFormdata({
             breedname: breed.breedname,
             group: breed.group,
@@ -146,17 +153,9 @@ const AdminBreed = () => {
             size: breed.size,
             origin: breed.origin,
             description: breed.description,
-            image: breed.image, 
+            image: null, 
         });
-        console.log("Form data after selection:", {
-            breedname: breed.breedname,
-            group: breed.group,
-            lifespan: breed.lifespan,
-            size: breed.size,
-            origin: breed.origin,
-            description: breed.description,
-            image: breed.image,
-        }); 
+       
     };
 
     const resetForm = () => {
@@ -270,10 +269,6 @@ const AdminBreed = () => {
                     ))}
                 </ul>
             </div>
-
-
-
-
 
         </section>
 
