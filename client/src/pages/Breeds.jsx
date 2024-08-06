@@ -2,9 +2,13 @@ import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import apiAxios from "../services/api";
+import { useDispatch } from "react-redux";
+import { addFavoriteBreed } from "../redux/store.js";
+import FavoriteBreeds from "../redux/FavoriteBreeds.jsx";
 
 const Breeds = () => {
 
+    const dispatch = useDispatch();
     const url = 'http://localhost:3000';
 
     const [breeds, setBreeds] = useState([]); 
@@ -14,6 +18,8 @@ const Breeds = () => {
         size:""
     });
    
+    const [showFavorites ,setShowFavorites] = useState(false);
+
     useEffect(() => {
         
         const fetchBreeds = async () => {
@@ -73,7 +79,14 @@ const Breeds = () => {
 
     };
 
-    
+    const handleAddFavorite = (breed) => {
+        console.log('Dispatching addFavoriteBreed action for breed:', breed);
+        dispatch(addFavoriteBreed(breed));
+    }
+
+    const toggleShowFavorites = () =>{
+        setShowFavorites(!showFavorites);
+    }
 
     
     return (
@@ -83,7 +96,17 @@ const Breeds = () => {
                 <h1 className="text-sky-700 font-quick sm:text-3xl text-xl font-bold">Dog  Breeds.</h1>
 
 
+                <button 
+                    onClick={toggleShowFavorites}
+                    className="mt-2 p-2 bg-blue-500 text-white rounded"
+                >
+                    {showFavorites ? 'Show All Breeds' : 'Show Favorite Breeds'}
+                </button>
 
+                {showFavorites ? (
+                    <FavoriteBreeds />
+                ) : (
+                    <>
                 <div className="mb-4">
                     <label className="mr-2">Group:</label>
                     <select
@@ -137,14 +160,17 @@ const Breeds = () => {
                             <p><strong>Origin:</strong> {breed.origin}</p>
                             <p><strong>Description:</strong> {breed.description}</p>
                             {breed.image && <img  src={`${url}/uploads/${breed.image}`} alt={breed.breedname} className="w-auto h-auto sm:h-80 object-cover mt-auto" />}
+                            <button 
+                                onClick={() => handleAddFavorite(breed)} // Dispatch the action
+                                className="mt-2 p-2 bg-black text-white rounded"
+                            >
+                                Add to Favorites
+                            </button>
                         </div>
                     ))}
                 </div>
-
-
-
-
-
+              </>
+                )}
             </div>
             <Footer />
         </div>

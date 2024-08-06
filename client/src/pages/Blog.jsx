@@ -18,7 +18,6 @@ const Blog = () => {
     <h1 className='text-white font-quick  sm:text-3xl text-xl font-bold'>Add Blog </h1>
     
     </div>
-    
         <Footer/>
     
     
