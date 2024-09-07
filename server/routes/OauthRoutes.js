@@ -1,7 +1,12 @@
 import { Router } from "express";
+import dotenv from 'dotenv';
 import { loginPassport } from "../utils/LoginpassportGoogle.js";
 import { signupPassport } from "../utils/SignuppassportGoogle.js";
 import createJwt from "../utils/createJwt.js";
+
+dotenv.config();
+
+const reactUrl = process.env.REACT_URL;
 
  const router = Router();
 
@@ -17,7 +22,7 @@ router.get('/google/signup/callback',
 
     const token = createJwt(req.user); 
     console.log('logging token from backend', token);
-    const redirectUrl = `http://localhost:5173/google-callback?token=${token}`;
+    const redirectUrl = `${reactUrl}/google-callback?token=${token}`;
     console.log('Redirecting to:', redirectUrl); 
     res.redirect(redirectUrl);
   }
@@ -38,7 +43,7 @@ router.get('/google/login/callback',
     }
 
     const token = createJwt(req.user);
-    const redirectUrl = `http://localhost:5173/google-callback?token=${token}`;
+    const redirectUrl = `${reactUrl}/google-callback?token=${token}`;
     res.redirect(redirectUrl);
   }
 );

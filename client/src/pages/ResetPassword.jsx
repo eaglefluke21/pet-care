@@ -18,8 +18,8 @@ const ResetPassword = () => {
 
         try{
 
-            const backendurl = 'http://localhost:3000';
-            const url = `${backendurl}/users/reset-password/${token}`;
+            const apiUrl = import.meta.env.VITE_API_URL;
+            const url = `${apiUrl}/users/reset-password/${token}`;
             const response = await fetch (url,{
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json'},

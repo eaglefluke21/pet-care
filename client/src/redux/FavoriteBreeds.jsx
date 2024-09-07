@@ -6,7 +6,9 @@ const FavoriteBreeds = () => {
   const favoriteBreeds = useSelector((state) => state.favoriteBreeds);
   const dispatch = useDispatch();
 
-  const url = 'http://localhost:3000';
+
+  const apiUrl = import.meta.env.VITE_API_URL;
+
 
 
   console.log('Favorite Breeds:', favoriteBreeds);
@@ -28,7 +30,7 @@ const FavoriteBreeds = () => {
                 <p><strong>Size:</strong> {breed.size}</p>
                 <p><strong>Origin:</strong> {breed.origin}</p>
                 <p><strong>Description:</strong> {breed.description}</p>
-                {breed.image && <img  src={`${url}/uploads/${breed.image}`} alt={breed.breedname} className="w-auto h-auto sm:h-80 object-cover mt-auto" />}
+                {breed.image && <img  src={`${apiUrl}/uploads/${breed.image}`} alt={breed.breedname} className="w-auto h-auto sm:h-80 object-cover mt-auto" />}
                 <button 
                     onClick={() => dispatch(removeFavoriteBreed(breed._id))} // Dispatch the action
                     className="mt-2 p-2 bg-black text-white rounded"

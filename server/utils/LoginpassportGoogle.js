@@ -5,10 +5,12 @@ import UserModel from '../models/User.js';
 
 dotenv.config();
 
+const apiUrl = process.env.API_URL;
+
 passport.use('google-login', new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: "http://localhost:3000/OauthRoutes/google/login/callback"
+    callbackURL: `${apiUrl}/OauthRoutes/google/login/callback`
   },
   async (accessToken, refreshToken, profile, done) => {
     try {

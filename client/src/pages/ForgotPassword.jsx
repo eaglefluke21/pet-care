@@ -15,8 +15,8 @@ const ForgotPassword = () => {
 
         try{
 
-            const backendurl = 'http://localhost:3000';
-            const url = `${backendurl}/users/forgot-password`;
+            const apiUrl = import.meta.env.VITE_API_URL;
+            const url = `${apiUrl}/users/forgot-password`;
 
             const response = await fetch (url,{
                 method: 'POST',

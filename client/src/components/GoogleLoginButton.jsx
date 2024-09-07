@@ -7,7 +7,9 @@ const GoogleLoginButton = () => {
     
   const handleGoogleLogin = async () => {
 
-    window.location.href = 'http://localhost:3000/OauthRoutes/google'
+    const apiUrl = import.meta.env.VITE_API_URL;
+
+    window.location.href = `${apiUrl}/OauthRoutes/google`
 
     
   };

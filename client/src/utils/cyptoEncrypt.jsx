@@ -1,6 +1,7 @@
 async function cryptoEncrypt() {
-    const backendurl = 'http://localhost:3000';
-    const url = `${backendurl}/users/getEncryptkey`;
+  const apiUrl = import.meta.env.VITE_API_URL;
+    
+    const url = `${apiUrl}/users/getEncryptkey`;
     try {
       const response = await fetch(url);
       if (!response.ok) {

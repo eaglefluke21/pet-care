@@ -37,8 +37,9 @@ function AdminSignup() {
         try{
             const cryptoKey = await cryptoEncrypt();
 
-            const backendurl = 'http://localhost:3000';
-            const url = `${backendurl}/users/adminregister`;
+            const apiUrl = import.meta.env.VITE_API_URL;
+
+            const url = `${apiUrl}/users/adminregister`;
 
             const encryptedPassword = CryptoJS.AES.encrypt(Formdata.password,cryptoKey).toString();
 

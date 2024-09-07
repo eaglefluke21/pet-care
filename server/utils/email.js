@@ -4,11 +4,11 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const EMAIL = process.env.EMAIL;
-const frontendurl = 'http://localhost:5173';
+const reactUrl = process.env.REACT_URL;
 
 
 export const sendResetEmail = (email,token) => {
-    const resetUrl = `${frontendurl}/reset-password/${token}`;
+    const resetUrl = `${reactUrl}/reset-password/${token}`;
     const mailOptions = {
         from: EMAIL,
         to: email,

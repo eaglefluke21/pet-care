@@ -13,15 +13,16 @@ import { fileURLToPath } from 'url';
 dotenv.config();
 const port = process.env.PORT;
 
+const reactUrl = process.env.REACT_URL;
+
 const app = express();
 app.use(express.json());
 app.use(cookieParser());
 
 const corsOptions = {
-  origin: 'http://localhost:5173', 
+  origin: `${reactUrl}`, 
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true 
+  allowedHeaders: ['Content-Type', 'Authorization'], 
 };
 app.use(cors(corsOptions));
 

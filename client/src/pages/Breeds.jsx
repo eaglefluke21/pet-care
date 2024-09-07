@@ -9,7 +9,9 @@ import FavoriteBreeds from "../redux/FavoriteBreeds.jsx";
 const Breeds = () => {
 
     const dispatch = useDispatch();
-    const url = 'http://localhost:3000';
+
+    const apiUrl = import.meta.env.VITE_API_URL;
+   
 
     const [breeds, setBreeds] = useState([]); 
     const [filteredBreeds, setFilteredBreeds] = useState([]);
@@ -159,7 +161,7 @@ const Breeds = () => {
                             <p><strong>Size:</strong> {breed.size}</p>
                             <p><strong>Origin:</strong> {breed.origin}</p>
                             <p><strong>Description:</strong> {breed.description}</p>
-                            {breed.image && <img  src={`${url}/uploads/${breed.image}`} alt={breed.breedname} className="w-auto h-auto sm:h-80 object-cover mt-auto" />}
+                            {breed.image && <img  src={`${apiUrl}/uploads/${breed.image}`} alt={breed.breedname} className="w-auto h-auto sm:h-80 object-cover mt-auto" />}
                             <button 
                                 onClick={() => handleAddFavorite(breed)} // Dispatch the action
                                 className="mt-2 p-2 bg-black text-white rounded"

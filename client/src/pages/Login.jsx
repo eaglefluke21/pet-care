@@ -42,8 +42,8 @@ function Login() {
         try{
             const cryptoKey = await cryptoEncrypt();
 
-            const backendurl = 'http://localhost:3000';
-            const url = `${backendurl}/users/login`;
+            const apiUrl = import.meta.env.VITE_API_URL;
+            const url = `${apiUrl}/users/login`;
 
             const encryptedPassword = CryptoJS.AES.encrypt(Formdata.password,cryptoKey).toString();
 

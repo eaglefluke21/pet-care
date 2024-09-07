@@ -40,8 +40,8 @@ function Signup() {
         try{
             const cryptoKey = await cryptoEncrypt();
 
-            const backendurl = 'http://localhost:3000';
-            const url = `${backendurl}/users/register`;
+            const apiUrl = import.meta.env.VITE_API_URL;
+            const url = `${apiUrl}/users/register`;
 
             const encryptedPassword = CryptoJS.AES.encrypt(Formdata.password,cryptoKey).toString();
 
@@ -79,7 +79,7 @@ function Signup() {
       
   const handleGoogleLogin = async () => {
 
-    window.location.href = 'http://localhost:3000/OauthRoutes/google/signup'
+    window.location.href = `${apiUrl}/OauthRoutes/google/signup`
 
     
   };
