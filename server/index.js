@@ -43,10 +43,11 @@ app.use(signupPassport.session());
 
 
 
-app.get('/dashboard', (req, res) => {
-    res.send('Dashboard Page');
-  });
 
+
+  app.get('/', (req, res) => {
+    res.send('server root  working');
+  });
 
 
 app.use('/users',userRoutes());
