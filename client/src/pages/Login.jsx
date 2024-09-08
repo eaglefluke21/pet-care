@@ -7,12 +7,14 @@ import { NavLink } from "react-router-dom";
 import CryptoJS from "crypto-js";
 import cryptoEncrypt from "../utils/cyptoEncrypt";
 import { useNavigate } from "react-router-dom";
-
+import Popup from "../components/Popup";
 
 
 function Login() {
 
+    const apiUrl = import.meta.env.VITE_API_URL;
 
+    const[isPopupVisible , setPopupVisible] = useState(false);
 
     const navigate = useNavigate();
     
@@ -42,7 +44,7 @@ function Login() {
         try{
             const cryptoKey = await cryptoEncrypt();
 
-            const apiUrl = import.meta.env.VITE_API_URL;
+            
             const url = `${apiUrl}/users/login`;
 
             const encryptedPassword = CryptoJS.AES.encrypt(Formdata.password,cryptoKey).toString();
@@ -68,7 +70,7 @@ function Login() {
                 navigate('/home');
                            
             } else {
-                alert("Invalid email or password");
+                setPopupVisible(true); 
                 console.error('User Login failed', error);
             }
 
@@ -80,9 +82,14 @@ function Login() {
     }
 
 
+    const closePopup = () => {
+        setPopupVisible(false);
+    };
+
+
     const handleGoogleLogin = async () => {
 
-        window.location.href = 'http://localhost:3000/OauthRoutes/google/login';
+        window.location.href = `${apiUrl}/OauthRoutes/google/login`;
     
         
       };
@@ -94,7 +101,8 @@ function Login() {
 
         <div className="flex flex-col flex-grow lg:flex-row lg:justify-evenly bg-gradient-to-r from-sky-100 to-sky-200 py-16 rounded-md">
 
-            <form className="flex flex-col justify-center px-6 sm:px-40 lg:px-20 lg:w-[40rem]" onSubmit={handleSubmit}>
+        <div className="flex flex-col justify-center px-6 sm:px-40 lg:px-20 lg:w-[40rem]">
+            <form  onSubmit={handleSubmit}>
 
             <p className="font-quick text-3xl font-bold mb-10">Log In to Your Account</p>
 
@@ -121,13 +129,26 @@ function Login() {
         <hr className="border-t-2 border-black w-1/4 ml-4"/>
       </div>
 
-        <div className="flex flex-row justify-center gap-8 ">
-      <button onClick={handleGoogleLogin} className="w-3/4 bg-white rounded-md border-2  border-black font-quick font-semibold  text-black flex flex-row justify-center items-center gap-2"> <span> <img src={Google} className="h-10 w-10"/></span> Google </button>
-      </div>
-
             </form>  
 
+            <div className="flex flex-col justify-center items-center " >
+            <button onClick={handleGoogleLogin} className="w-3/4 bg-white rounded-md border-2  border-black font-quick font-semibold  text-black flex flex-row justify-center items-center gap-2"> <span> <img src={Google} className="h-10 w-10"/></span> Google </button>
+            </div>
+
+
+            </div>
+
             <img src={LoginImage} className="rounded-md shadow-md object-cover hidden lg:block"/>
+
+        </div>
+
+
+        <div>
+            {
+                isPopupVisible && 
+                    <Popup message="Incorrect Credentials" onClose={closePopup} />
+                
+            }
 
         </div>
 

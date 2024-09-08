@@ -13,6 +13,8 @@ function Signup() {
 
     
 
+    const apiUrl = import.meta.env.VITE_API_URL;
+    
     const[isPopupVisible , setPopupVisible] = useState(false);
 
 
@@ -40,7 +42,6 @@ function Signup() {
         try{
             const cryptoKey = await cryptoEncrypt();
 
-            const apiUrl = import.meta.env.VITE_API_URL;
             const url = `${apiUrl}/users/register`;
 
             const encryptedPassword = CryptoJS.AES.encrypt(Formdata.password,cryptoKey).toString();
